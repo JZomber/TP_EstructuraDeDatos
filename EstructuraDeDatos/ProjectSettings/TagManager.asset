@@ -44,14 +44,17 @@ TagManager:
   - name: Ground
     uniqueID: 390984557
     locked: 0
-  - name: Traps
-    uniqueID: 3581193317
-    locked: 0
   - name: Walls
     uniqueID: 4277233177
     locked: 0
   - name: Props
     uniqueID: 3900820945
+    locked: 0
+  - name: Traps
+    uniqueID: 3581193317
+    locked: 0
+  - name: Traps2
+    uniqueID: 3237690303
     locked: 0
   - name: Enemy
     uniqueID: 1189856471
