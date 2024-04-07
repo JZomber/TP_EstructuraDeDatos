@@ -18,5 +18,10 @@ public class PlayerDamage : MonoBehaviour
             lifeSystem.TakeDamage(1); // Reduce la vida del jugador en 1
             Destroy(other.gameObject); // Destruye el objeto enemigo
         }
+
+        if (other.CompareTag("LifePotion")) // Si el objeto es una poción de vida
+        {
+            lifeSystem.GainLife(1, other.gameObject); // Devuelve 1 de vida y la referencia al objeto
+        }
     }
 }
