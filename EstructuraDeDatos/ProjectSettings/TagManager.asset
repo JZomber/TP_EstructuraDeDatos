@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - LifePotion
   layers:
   - Default
   - TransparentFX
@@ -41,6 +42,27 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 1547882547
+    locked: 0
+  - name: Traps
+    uniqueID: 4275485179
+    locked: 0
+  - name: Props
+    uniqueID: 3382578131
+    locked: 0
+  - name: Guns
+    uniqueID: 610857881
+    locked: 0
+  - name: Enemy
+    uniqueID: 2890781011
+    locked: 0
+  - name: Player
+    uniqueID: 2323503583
+    locked: 0
+  - name: Walls
+    uniqueID: 1751231777
     locked: 0
   - name: UI
     uniqueID: 2192670139
