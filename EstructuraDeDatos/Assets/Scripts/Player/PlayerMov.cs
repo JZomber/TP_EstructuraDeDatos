@@ -7,6 +7,7 @@ public class PlayerMov : MonoBehaviour
 {
     [SerializeField] private float speedMov;
     //private Animator animator;
+    [SerializeField] private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -22,31 +23,22 @@ public class PlayerMov : MonoBehaviour
         float inputY = Input.GetAxisRaw("Vertical");
 
         transform.position += new Vector3(inputX, inputY, 0) * (speedMov * Time.deltaTime);
-
-        /*
-        if (inputY > 0)
+        
+        if (inputY > 0 || inputY < 0)
         {
-            animator.SetBool("Up", true);
+            animator.SetBool("isRunning", true); // Condición para la transición
+            animator.SetFloat("Speed", Mathf.Abs(inputY)); //Independientemente del input, siempre da positivo
         }
-        else if (inputY < 0)
+        else if (inputX > 0 || inputX < 0)
         {
-            animator.SetBool("Down", true);
-        }
-        else if (inputX < 0)
-        {
-            animator.SetBool("Left", true);
-        }
-        else if (inputX > 0)
-        {
-            animator.SetBool("Right", true);
+            animator.SetBool("isRunning", true);
+            animator.SetFloat("Speed", Mathf.Abs(inputX));
         }
         else
         {
-            animator.SetBool("Up", false);
-            animator.SetBool("Down", false);
-            animator.SetBool("Left", false);
-            animator.SetBool("Right", false);
+            //Vuelve a "Idle"
+            animator.SetBool("isRunning", false);
+            animator.SetFloat("Speed", 0);
         }
-        */
     }
 }
