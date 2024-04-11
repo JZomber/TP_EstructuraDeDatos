@@ -1,61 +1,71 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class LifeSystem : MonoBehaviour
 {
     public int maxLife = 3; // Cantidad máxima de vida
-    private int currentLife; // Vida actual
-    public Image[] hearts; // Array de imágenes de los corazones
-    public GameObject _player;
+    private Stack<Image> heartStack = new Stack<Image>(); // Pila de corazones
+
+    public Image heartPrefab; // Prefab del corazón
+    public Transform heartParent; // Padre para los corazones
 
     void Start()
     {
-        currentLife = maxLife; // Configura la vida actual al máximo al inicio
-        UpdateHearts(); // Actualiza la visualización de los corazones
+        InitializeHearts();
+        UpdateHeartsVisual();
     }
 
-    // Método para actualizar la visualización de los corazones
-    void UpdateHearts()
+    void InitializeHearts()
     {
-        for (int i = 0; i < hearts.Length; i++)
+        for (int i = 0; i < maxLife; i++)
         {
-            // Si el índice es menor que la vida actual, muestra el corazón lleno, de lo contrario, muestra el corazón vacío
-            if (i < currentLife)
+            Image newHeart = Instantiate(heartPrefab, heartParent);
+            newHeart.gameObject.SetActive(true);
+            heartStack.Push(newHeart);
+        }
+    }
+
+    void UpdateHeartsVisual()
+    {
+        foreach (Image heart in heartStack)
+        {
+            heart.enabled = true;
+        }
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        for (int i = 0; i < damageAmount; i++)
+        {
+            if (heartStack.Count > 0)
             {
-                hearts[i].enabled = true; // Mostrar corazón lleno
+                Image heart = heartStack.Pop();
+                Destroy(heart.gameObject);
             }
             else
             {
-                hearts[i].enabled = false; // Mostrar corazón vacío
-            }
-
-            if (currentLife == 0)
-            {
-                _player.SetActive(false);
+                Debug.LogError("Player is already dead!");
+                // Aquí puedes manejar lo que sucede cuando el jugador está muerto
             }
         }
     }
 
-    // Método para reducir la vida del jugador
-    public void TakeDamage(int damageAmount)
+    public void GainLife(int lifeAmount)
     {
-        currentLife -= damageAmount; // Reduce la vida actual según el daño recibido
-        currentLife = Mathf.Clamp(currentLife, 0, maxLife); // Asegura que la vida no sea menor que 0 ni mayor que la vida máxima
-        UpdateHearts(); // Actualiza la visualización de los corazones
-
-        // Si la vida llega a cero, puedes hacer algo aquí, como reiniciar el nivel o mostrar un mensaje de "Game Over"
-    }
-
-    // Método para aumentar la vida del jugador (si es necesario)
-    public void GainLife(int lifeAmount, GameObject other)
-    {
-        if (currentLife < maxLife) //Chequeo de que no tenga vida máxima antes de agregar 1 de vida
+        for (int i = 0; i < lifeAmount; i++)
         {
-            currentLife += lifeAmount; // Aumenta la vida actual según la cantidad recibida
-            currentLife = Mathf.Clamp(currentLife, 0, maxLife); // Asegura que la vida no sea menor que 0 ni mayor que la vida máxima
-            UpdateHearts(); // Actualiza la visualización de los corazones
-            
-            other.SetActive(false); //Desactiva el objeto con el que interactuó el player
+            if (heartStack.Count < maxLife)
+            {
+                Image newHeart = Instantiate(heartPrefab, heartParent);
+                newHeart.gameObject.SetActive(true);
+                heartStack.Push(newHeart);
+            }
+            else
+            {
+                Debug.LogWarning("Player life is already at maximum!");
+                // Aquí puedes manejar lo que sucede cuando la vida del jugador ya está en el máximo
+            }
         }
     }
 }
