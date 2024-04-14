@@ -5,24 +5,32 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void MenuScreen() //Carga la pantalla "Menú"
     {
-        
+        SceneManager.LoadScene("Menu");
+    }
+    
+    public void VictoryScreen() // Carga la pantalla de victoria
+    {
+        SceneManager.LoadScene("Victory");
+    }
+    
+    public void DefeatScreen() // Carga la pantalla de derrota
+    {
+        SceneManager.LoadScene("Defeat");
+    }
+    
+    public void LoadFirstLevel() //Carga el primer nivel
+    {
+        SceneManager.LoadScene("TestScene");
+    }
+    
+    public void LoadSecondLevel() //Carga el segundo nivel
+    {
+        //SceneManager.LoadScene("NOMBRE_DEl_NIVEL");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void LoadStarterScene()
-    {
-        SceneManager.LoadScene(1);
-    }
-
-    public void GameQuit()
+    public void GameQuit() // Quita el juego
     {
         Application.Quit();
     }
