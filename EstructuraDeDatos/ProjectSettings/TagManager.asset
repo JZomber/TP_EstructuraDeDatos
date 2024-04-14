@@ -46,11 +46,14 @@ TagManager:
   - name: Ground
     uniqueID: 1547882547
     locked: 0
+  - name: Props
+    uniqueID: 3325709299
+    locked: 0
+  - name: Doors
+    uniqueID: 2782160479
+    locked: 0
   - name: Traps
     uniqueID: 4275485179
-    locked: 0
-  - name: PropsGround
-    uniqueID: 3382578131
     locked: 0
   - name: Guns
     uniqueID: 610857881
@@ -63,9 +66,6 @@ TagManager:
     locked: 0
   - name: Walls
     uniqueID: 1751231777
-    locked: 0
-  - name: PropsWalls
-    uniqueID: 3325709299
     locked: 0
   - name: UI
     uniqueID: 2192670139
