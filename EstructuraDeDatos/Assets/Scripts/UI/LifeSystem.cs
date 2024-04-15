@@ -1,6 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class LifeSystem : MonoBehaviour
 {
@@ -29,9 +30,6 @@ public class LifeSystem : MonoBehaviour
             Vector3 heartPosition = new Vector3(i * offsetX, 0f, 0f);
             newHeart.transform.localPosition = heartPosition;
 
-            // Activar el objeto de corazón
-            newHeart.gameObject.SetActive(true);
-
             // Agregar el corazón a la pila de corazones
             hearts.Push(newHeart);
         }
@@ -40,15 +38,9 @@ public class LifeSystem : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         currentLife -= damageAmount; // Reduce la vida actual según el daño recibido
-        currentLife = Mathf.Clamp(currentLife, 0, maxLife); // Asegura que la vida no sea menor que 0 ni mayor que la vida máxima
 
         // Actualiza la visualización de los corazones
-        int heartsToShow = Mathf.Max(currentLife, 0); // Determina cuántos corazones mostrar según la vida actual
-        while (hearts.Count > heartsToShow)
-        {
-            Image heartToRemove = hearts.Pop();
-            Destroy(heartToRemove.gameObject);
-        }
+        UpdateHeartDisplay();
 
         if (currentLife <= 0)
         {
@@ -56,6 +48,34 @@ public class LifeSystem : MonoBehaviour
             // Destruir el jugador
             //Destroy(player);
             return;
+        }
+    }
+
+    public void UpdateHeartDisplay()
+    {
+        // Determina cuántos corazones mostrar según la vida actual
+        int heartsToShow = Mathf.Max(currentLife, 0);
+
+        // Muestra o esconde los corazones según la vida actual
+        while (hearts.Count > heartsToShow)
+        {
+            Image heartToRemove = hearts.Pop();
+            heartToRemove.gameObject.SetActive(false);
+        }
+        while (hearts.Count < heartsToShow)
+        {
+            // Crear una nueva instancia del prefab de corazón
+            Image newHeart = Instantiate(heartPrefab, heartParent);
+
+            // Ajustar la posición horizontal del corazón
+            Vector3 heartPosition = new Vector3((hearts.Count) * 100f, 0f, 0f);
+            newHeart.transform.localPosition = heartPosition;
+
+            // Activar el objeto de corazón
+            newHeart.gameObject.SetActive(true);
+
+            // Agregar el corazón a la pila de corazones
+            hearts.Push(newHeart);
         }
     }
 }
