@@ -117,4 +117,17 @@ public class Stack_TDAPila<T>
             throw new Exception("La pila no ha sido inicializada.");
         }
     }
+
+    public int Count()
+    {
+        if (inicializado)
+        {
+            return tope + 1;
+        }
+        else
+        {
+            throw new Exception("La pila no ha sido inicializada.");
+        }
+    }
+
 }
