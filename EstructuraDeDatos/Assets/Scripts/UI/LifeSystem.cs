@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,77 +5,57 @@ public class LifeSystem : MonoBehaviour
 {
     public int maxLife = 3; // Cantidad máxima de vida
     private int currentLife; // Vida actual
-    public Image heartPrefab; // Prefab del corazón
-    public Transform heartParent; // Padre para los corazones
-    private Stack_TDAPila<Image> hearts = new Stack_TDAPila<Image>(); // Pila de imágenes de los corazones
-    public GameObject player; // Referencia al jugador
+    public Image[] hearts; // Array de imágenes de los corazones
+    public GameObject _player;
 
     void Start()
     {
         currentLife = maxLife; // Configura la vida actual al máximo al inicio
-        hearts.InicializarPila(maxLife); // Inicializa la pila con el tamaño máximo de vida
-        InstantiateHearts(); // Crea y muestra los corazones
+        UpdateHearts(); // Actualiza la visualización de los corazones
     }
 
-    void InstantiateHearts()
+    // Método para actualizar la visualización de los corazones
+    void UpdateHearts()
     {
-        float offsetX = 100f; // Espacio horizontal entre los corazones (tamaño del corazón)
-        for (int i = 0; i < maxLife; i++)
+        for (int i = 0; i < hearts.Length; i++)
         {
-            // Crear una nueva instancia del prefab de corazón
-            Image newHeart = Instantiate(heartPrefab, heartParent);
+            // Si el índice es menor que la vida actual, muestra el corazón lleno, de lo contrario, muestra el corazón vacío
+            if (i < currentLife)
+            {
+                hearts[i].enabled = true; // Mostrar corazón lleno
+            }
+            else
+            {
+                hearts[i].enabled = false; // Mostrar corazón vacío
+            }
 
-            // Ajustar la posición horizontal del corazón
-            Vector3 heartPosition = new Vector3(i * offsetX, 0f, 0f);
-            newHeart.transform.localPosition = heartPosition;
-
-            // Agregar el corazón a la pila de corazones
-            hearts.Apilar(newHeart);
+            if (currentLife == 0)
+            {
+                _player.SetActive(false);
+            }
         }
     }
 
+    // Método para reducir la vida del jugador
     public void TakeDamage(int damageAmount)
     {
         currentLife -= damageAmount; // Reduce la vida actual según el daño recibido
+        currentLife = Mathf.Clamp(currentLife, 0, maxLife); // Asegura que la vida no sea menor que 0 ni mayor que la vida máxima
+        UpdateHearts(); // Actualiza la visualización de los corazones
 
-        // Actualiza la visualización de los corazones
-        UpdateHeartDisplay();
-
-        if (currentLife <= 0)
-        {
-            Debug.LogError("Player is already dead!");
-            // Destruir el jugador
-            //Destroy(player);
-            return;
-        }
+        // Si la vida llega a cero, puedes hacer algo aquí, como reiniciar el nivel o mostrar un mensaje de "Game Over"
     }
 
-    public void UpdateHeartDisplay()
+    // Método para aumentar la vida del jugador (si es necesario)
+    public void GainLife(int lifeAmount, GameObject other)
     {
-        // Determina cuántos corazones mostrar según la vida actual
-        int heartsToShow = Mathf.Max(currentLife, 0);
-
-        // Muestra o esconde los corazones según la vida actual
-        while (hearts.Count() > heartsToShow)
+        if (currentLife < maxLife) //Chequeo de que no tenga vida máxima antes de agregar 1 de vida
         {
-            Image heartToRemove = hearts.Tope();
-            hearts.Desapilar();
-            heartToRemove.gameObject.SetActive(false);
-        }
-        while (hearts.Count() < heartsToShow)
-        {
-            // Crear una nueva instancia del prefab de corazón
-            Image newHeart = Instantiate(heartPrefab, heartParent);
-
-            // Ajustar la posición horizontal del corazón
-            Vector3 heartPosition = new Vector3((hearts.Count() * 100f), 0f, 0f);
-            newHeart.transform.localPosition = heartPosition;
-
-            // Activar el objeto de corazón
-            newHeart.gameObject.SetActive(true);
-
-            // Agregar el corazón a la pila de corazones
-            hearts.Apilar(newHeart);
+            currentLife += lifeAmount; // Aumenta la vida actual según la cantidad recibida
+            currentLife = Mathf.Clamp(currentLife, 0, maxLife); // Asegura que la vida no sea menor que 0 ni mayor que la vida máxima
+            UpdateHearts(); // Actualiza la visualización de los corazones
+            
+            other.SetActive(false); //Desactiva el objeto con el que interactuó el player
         }
     }
 }

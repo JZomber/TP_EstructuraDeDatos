@@ -1,11 +1,10 @@
+// Ejemplo de cómo dañar al jugador desde otro script
+// Asume que hay una colisión o algún otro evento que requiere dañar al jugador
 using UnityEngine;
 
 public class PlayerDamage : MonoBehaviour
 {
     private LifeSystem lifeSystem;
-    private bool canTakeDamage = true;
-
-    public float damageCooldownTime = 2f; // Tiempo de espera antes de volver a tomar daño
 
     void Start()
     {
@@ -14,17 +13,15 @@ public class PlayerDamage : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy") && canTakeDamage) // Si el jugador colisiona con un enemigo y puede tomar daño
+        if (other.CompareTag("Enemy")) // Si el jugador colisiona con un enemigo
         {
             lifeSystem.TakeDamage(1); // Reduce la vida del jugador en 1
-            canTakeDamage = false; // Deshabilita la capacidad de tomar daño temporalmente
-            StartCoroutine(ResetDamageCooldown()); // Espera un tiempo antes de permitir que el jugador tome daño nuevamente
+            Destroy(other.gameObject); // Destruye el objeto enemigo
         }
-    }
 
-    System.Collections.IEnumerator ResetDamageCooldown()
-    {
-        yield return new WaitForSeconds(damageCooldownTime); // Espera el tiempo especificado
-        canTakeDamage = true; // Permite que el jugador tome daño nuevamente
+        if (other.CompareTag("LifePotion")) // Si el objeto es una poción de vida
+        {
+            lifeSystem.GainLife(1, other.gameObject); // Devuelve 1 de vida y la referencia al objeto
+        }
     }
 }
