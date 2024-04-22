@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 public class QueueTdaCola<T> : IQueue<T>
 {
@@ -46,7 +45,7 @@ public class QueueTdaCola<T> : IQueue<T>
         return cola[index - 1];
     }
 
-    public bool isQueueEmpty()
+    public bool IsQueueEmpty()
     {
         return index == 0;
     }
