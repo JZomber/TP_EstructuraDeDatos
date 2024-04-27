@@ -9,6 +9,8 @@ public class PlayerMov : MonoBehaviour
     //private Animator animator;
     [SerializeField] private Animator animator;
 
+    public bool isDead = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -19,26 +21,29 @@ public class PlayerMov : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float inputX = Input.GetAxisRaw("Horizontal");
-        float inputY = Input.GetAxisRaw("Vertical");
+        if (!isDead)
+        {
+            float inputX = Input.GetAxisRaw("Horizontal");
+            float inputY = Input.GetAxisRaw("Vertical");
 
-        transform.position += new Vector3(inputX, inputY, 0) * (speedMov * Time.deltaTime);
+            transform.position += new Vector3(inputX, inputY, 0) * (speedMov * Time.deltaTime);
         
-        if (inputY > 0 || inputY < 0)
-        {
-            animator.SetBool("isRunning", true); // Condición para la transición
-            animator.SetFloat("Speed", Mathf.Abs(inputY)); //Independientemente del input, siempre da positivo
-        }
-        else if (inputX > 0 || inputX < 0)
-        {
-            animator.SetBool("isRunning", true);
-            animator.SetFloat("Speed", Mathf.Abs(inputX));
-        }
-        else
-        {
-            //Vuelve a "Idle"
-            animator.SetBool("isRunning", false);
-            animator.SetFloat("Speed", 0);
+            if (inputY > 0 || inputY < 0)
+            {
+                animator.SetBool("isRunning", true); // Condición para la transición
+                animator.SetFloat("Speed", Mathf.Abs(inputY)); //Independientemente del input, siempre da positivo
+            }
+            else if (inputX > 0 || inputX < 0)
+            {
+                animator.SetBool("isRunning", true);
+                animator.SetFloat("Speed", Mathf.Abs(inputX));
+            }
+            else
+            {
+                //Vuelve a "Idle"
+                animator.SetBool("isRunning", false);
+                animator.SetFloat("Speed", 0);
+            }
         }
     }
 }

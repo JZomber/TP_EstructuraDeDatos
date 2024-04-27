@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class LifeSystem : MonoBehaviour
@@ -12,6 +13,7 @@ public class LifeSystem : MonoBehaviour
     private Stack_TDAPila<Image> hearts = new Stack_TDAPila<Image>(); // Pila de imágenes de los corazones
     public GameObject player; // Referencia al jugador
 
+    
     void Start()
     {
         currentLife = maxLife; // Configura la vida actual al máximo al inicio
@@ -46,8 +48,9 @@ public class LifeSystem : MonoBehaviour
         if (currentLife <= 0)
         {
             Debug.LogError("Player is already dead!");
-            // Destruir el jugador
-            //Destroy(player);
+
+            player.GetComponent<PlayerMov>().isDead = true;
+            player.GetComponent<Animator>().SetTrigger("isDead");
             return;
         }
     }
