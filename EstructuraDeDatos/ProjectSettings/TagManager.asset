@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - LifePotion
   - PowerUp
+  - FastShoot
+  - Shield
+  - HealthPotion
   layers:
   - Default
   - TransparentFX

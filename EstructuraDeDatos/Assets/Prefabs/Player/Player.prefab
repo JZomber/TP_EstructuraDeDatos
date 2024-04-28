@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3389760964288330288}
   - component: {fileID: 7896966547820491801}
   - component: {fileID: 4665514447072346036}
+  - component: {fileID: 8826130604632612161}
   - component: {fileID: 8704498652214533481}
   m_Layer: 0
   m_Name: Player
@@ -179,6 +180,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageCooldownTime: 0.5
+--- !u!114 &8826130604632612161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2705700512366788034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a429bc94aba9a8c4382b168fa95eef4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &8704498652214533481
 Animator:
   serializedVersion: 5

@@ -1,52 +1,60 @@
 using System;
 
-public class QueueTdaCola<T> : IQueue<T>
+namespace UI.PowerUps
 {
-    private T[] cola;
-    private int index;
+    public class QueueTdaCola<T> : IQueue<T>
+    {
+        private T[] cola;
+        private int index;
     
-    public void InitQueue(int size) //Inicializo la cola
-    {
-        cola = new T[size];
-        index = 0;
-    }
-
-    public void Acolar(T obj) //Agrego un objeto a la cola
-    {
-        for (int i = index; i > 0; i--)
+        public void InitQueue(int size) //Inicializo la cola
         {
-            cola[i] = cola[i - 1];
+            cola = new T[size];
+            index = 0;
         }
 
-        cola[0] = obj;
-        index++;
-    }
-
-    public T DesAcolar() // Saco el primer elemento en entrar
-    {
-        if (index == 0)
+        public void Acolar(T obj) //Agrego un objeto a la cola
         {
-            throw new Exception("La cola esta vacia");
-        }
-        
-        T retorno = cola[index - 1];
-        index--;
-        
-        return retorno;
-    }
+            if (index >= cola.Length)
+            {
+                throw new Exception("La cola esta llena");
+            }
+            
+            for (int i = index; i > 0; i--)
+            {
+                cola[i] = cola[i - 1];
+            }
 
-    public T First() // Referencio al primer elemento en entrar
-    {
-        if (index == 0)
+            cola[0] = obj;
+            index++;
+        }
+
+        public T DesAcolar() // Saco el primer elemento en entrar
         {
-            throw new Exception("La cola esta vacia");
-        }
+            if (index == 0)
+            {
+                throw new Exception("La cola esta vacia");
+            }
         
-        return cola[index - 1];
-    }
+            T retorno = cola[index - 1];
+            index--;
+        
+            return retorno;
+        }
 
-    public bool IsQueueEmpty()
-    {
-        return index == 0;
+        public T First() // Referencio al primer elemento en entrar
+        {
+            if (index == 0)
+            {
+                throw new Exception("La cola esta vacia");
+            }
+        
+            return cola[index - 1];
+        }
+
+        public bool IsQueueEmpty()
+        {
+            return index == 0;
+        }
     }
 }

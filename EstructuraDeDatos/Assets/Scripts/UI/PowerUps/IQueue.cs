@@ -1,8 +1,11 @@
-public interface IQueue<T>
+namespace UI.PowerUps
 {
-    void Acolar(T obj);
-    T DesAcolar();
-    T First();
+    public interface IQueue<T>
+    {
+        void Acolar(T obj);
+        T DesAcolar();
+        T First();
     
-    bool IsQueueEmpty();
+        bool IsQueueEmpty();
+    }
 }

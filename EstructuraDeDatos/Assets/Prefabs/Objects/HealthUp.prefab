@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7827168394436937977}
   - component: {fileID: 8192831450682548480}
   m_Layer: 0
-  m_Name: FastMovement
+  m_Name: HealthUp
   m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: -969257997
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 279a1ced6cb2ae64d9d17596585f1c5c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9424c1554f994ff4a9879db3c6f05942, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
