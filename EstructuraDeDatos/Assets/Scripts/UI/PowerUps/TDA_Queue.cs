@@ -4,15 +4,15 @@ using UnityEngine.UI;
 
 namespace UI.PowerUps
 {
-    public class TDA_Queue : MonoBehaviour
+    public class TDA_Queue : MonoBehaviour 
     {
-        public Image[] imagePowerUps; //Array de imagenes
-        private GameObject currentImg; //Imagen actual (default = null)
+        public Image[] powerUpsImg; //Array de imagenes
+        private GameObject currentImg; //Imagen actual
         
         private QueueTdaCola<GameObject> powerUpsQueue = new QueueTdaCola<GameObject>(); //Cola de powerUps
         private int maxSize = 3; //Tamaño del array
         
-        public Transform powerUpParent; //Punto donde aparecen en UI
+        public Transform powerUpsParent; //Punto donde aparecen en UI
         public GameObject player; //Referencia al jugador
         
         // Start is called before the first frame update
@@ -23,7 +23,7 @@ namespace UI.PowerUps
 
         public void AddPowerUp(GameObject obj)
         {
-            powerUpsQueue.Acolar(obj); //Agrego la referencia al objeto a la lista
+            powerUpsQueue.Acolar(obj); //Agrego la referencia del objeto a la lista
             UpdatePowerDisplay();
             obj.SetActive(false);
         }
@@ -37,19 +37,19 @@ namespace UI.PowerUps
 
         private void InstantiatePowerUpUI(GameObject img)
         {
-            currentImg = Instantiate(img, powerUpParent); //Instancio la imagen actual del objeto en la lista
+            currentImg = Instantiate(img, powerUpsParent); //Instancio la imagen del primer objeto en la lista
         }
 
         private void UpdatePowerDisplay()
         {
-            GameObject firstPowerUp = powerUpsQueue.First(); //Obtengo al referencia al primer objeto en entrar
+            GameObject firstPowerUp = powerUpsQueue.First(); //Obtengo la referencia al primer objeto en entrar
             
-            for (int i = 0; i < imagePowerUps.Length; i++)
+            for (int i = 0; i < powerUpsImg.Length; i++)
             {
-                if (firstPowerUp.name == imagePowerUps[i].name) //Comparo el nombre del objeto con el de las imágenes
+                if (firstPowerUp.name == powerUpsImg[i].name) //Comparo el nombre del objeto con el de las imágenes
                 {
                     Destroy(currentImg);
-                    InstantiatePowerUpUI(imagePowerUps[i].GameObject()); //Muestro la referencia de la imagen
+                    InstantiatePowerUpUI(powerUpsImg[i].GameObject()); //Muestro la referencia de la imagen
                     break;
                 }
             }
