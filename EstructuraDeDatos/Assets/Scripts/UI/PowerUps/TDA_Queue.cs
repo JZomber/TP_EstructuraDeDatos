@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace UI.PowerUps
 {
-    public class TDA_Queue : MonoBehaviour 
+    public class TDA_Queue : MonoBehaviour
     {
         public Image[] powerUpsImg; //Array de imagenes
         private GameObject currentImg; //Imagen actual
@@ -24,7 +24,7 @@ namespace UI.PowerUps
         public void AddPowerUp(GameObject obj)
         {
             powerUpsQueue.Acolar(obj); //Agrego la referencia del objeto a la lista
-            UpdatePowerDisplay();
+            UpdatePowerUpDisplay();
             obj.SetActive(false);
         }
 
@@ -32,7 +32,7 @@ namespace UI.PowerUps
         {
             powerUpsQueue.DesAcolar();
             Destroy(currentImg);
-            UpdatePowerDisplay();
+            UpdatePowerUpDisplay();
         }
 
         private void InstantiatePowerUpUI(GameObject img)
@@ -40,7 +40,7 @@ namespace UI.PowerUps
             currentImg = Instantiate(img, powerUpsParent); //Instancio la imagen del primer objeto en la lista
         }
 
-        private void UpdatePowerDisplay()
+        private void UpdatePowerUpDisplay()
         {
             GameObject firstPowerUp = powerUpsQueue.First(); //Obtengo la referencia al primer objeto en entrar
             
