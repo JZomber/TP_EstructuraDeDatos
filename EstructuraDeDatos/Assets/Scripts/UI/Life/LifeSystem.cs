@@ -29,6 +29,7 @@ public class LifeSystem : MonoBehaviour
     public Transform heartParent; // Padre para los corazones
     private Stack_TDAPila<Image> hearts = new Stack_TDAPila<Image>(); // Pila de imágenes de los corazones
     public GameObject player; // Referencia al jugador
+    private float lastHeartXPosition;
 
 
     void Start()
@@ -62,6 +63,7 @@ public class LifeSystem : MonoBehaviour
         // Oculta y elimina el corazón perdido
         if (currentLife < maxLife)
         {
+            lastHeartXPosition = hearts.Tope().transform.localPosition.x;
             Image heartToRemove = hearts.Desapilar();
             heartToRemove.gameObject.SetActive(false);
             Destroy(heartToRemove.gameObject);
@@ -84,9 +86,11 @@ public class LifeSystem : MonoBehaviour
         {
             if (currentLife < maxLife)
             {
-                // Crea un nuevo corazón y lo agrega a la pila
+                Vector3 newPosition = new Vector3(lastHeartXPosition, 0f, 0f);
                 Image newHeart = Instantiate(heartPrefab, heartParent);
                 newHeart.gameObject.SetActive(true);
+                newHeart.transform.localPosition = newPosition;
+
                 hearts.Apilar(newHeart);
                 currentLife++;
             }
