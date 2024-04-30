@@ -6,6 +6,23 @@ using UnityEngine.UI;
 
 public class LifeSystem : MonoBehaviour
 {
+    private static LifeSystem instance;
+    public static LifeSystem Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<LifeSystem>();
+                if (instance == null)
+                {
+                    Debug.LogError("No se encontró el componente LifeSystem en la escena.");
+                }
+            }
+            return instance;
+        }
+    }
+
     public int maxLife = 3; // Cantidad máxima de vida
     private int currentLife; // Vida actual
     public Image heartPrefab; // Prefab del corazón
@@ -13,7 +30,7 @@ public class LifeSystem : MonoBehaviour
     private Stack_TDAPila<Image> hearts = new Stack_TDAPila<Image>(); // Pila de imágenes de los corazones
     public GameObject player; // Referencia al jugador
 
-    
+
     void Start()
     {
         currentLife = maxLife; // Configura la vida actual al máximo al inicio
@@ -42,8 +59,13 @@ public class LifeSystem : MonoBehaviour
     {
         currentLife -= damageAmount; // Reduce la vida actual según el daño recibido
 
-        // Actualiza la visualización de los corazones
-        UpdateHeartDisplay();
+        // Oculta y elimina el corazón perdido
+        if (currentLife < maxLife)
+        {
+            Image heartToRemove = hearts.Desapilar();
+            heartToRemove.gameObject.SetActive(false);
+            Destroy(heartToRemove.gameObject);
+        }
 
         if (currentLife <= 0)
         {
@@ -55,32 +77,19 @@ public class LifeSystem : MonoBehaviour
         }
     }
 
-    public void UpdateHeartDisplay()
+    // Restaura la vida del jugador
+    public void HealPlayer(int healAmount)
     {
-        // Determina cuántos corazones mostrar según la vida actual
-        int heartsToShow = Mathf.Max(currentLife, 0);
-
-        // Muestra o esconde los corazones según la vida actual
-        while (hearts.Count() > heartsToShow)
+        for (int i = 0; i < healAmount; i++)
         {
-            Image heartToRemove = hearts.Tope();
-            hearts.Desapilar();
-            heartToRemove.gameObject.SetActive(false);
-        }
-        while (hearts.Count() < heartsToShow)
-        {
-            // Crear una nueva instancia del prefab de corazón
-            Image newHeart = Instantiate(heartPrefab, heartParent);
-
-            // Ajustar la posición horizontal del corazón
-            Vector3 heartPosition = new Vector3((hearts.Count() * 100f), 0f, 0f);
-            newHeart.transform.localPosition = heartPosition;
-
-            // Activar el objeto de corazón
-            newHeart.gameObject.SetActive(true);
-
-            // Agregar el corazón a la pila de corazones
-            hearts.Apilar(newHeart);
+            if (currentLife < maxLife)
+            {
+                // Crea un nuevo corazón y lo agrega a la pila
+                Image newHeart = Instantiate(heartPrefab, heartParent);
+                newHeart.gameObject.SetActive(true);
+                hearts.Apilar(newHeart);
+                currentLife++;
+            }
         }
     }
 }

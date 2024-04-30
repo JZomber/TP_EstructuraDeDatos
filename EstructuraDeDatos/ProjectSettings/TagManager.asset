@@ -10,6 +10,7 @@ TagManager:
   - FastShoot
   - Shield
   - HealthPotion
+  - LifeController
   layers:
   - Default
   - TransparentFX
