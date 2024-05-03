@@ -6632,7 +6632,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 156674170354270020, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
       propertyPath: m_SortingLayer
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 156674170354270020, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
       propertyPath: m_SortingLayerID
@@ -7737,11 +7737,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8bf2f8062014c46b9f505b296990f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imagePowerUps:
-  - {fileID: 5802717611334380631, guid: ee3989676e79a04428125752104b082f, type: 3}
-  - {fileID: 5802717611334380631, guid: edcfd3e53c0d29042b35c155835e1002, type: 3}
-  - {fileID: 5802717611334380631, guid: ac14c773e515aa8499b3c867ab68486c, type: 3}
-  powerUpParent: {fileID: 1464754342}
+  powerUpsImg: []
+  powerUpsParent: {fileID: 0}
   player: {fileID: 1458859689}
 --- !u!1 &2022714361
 GameObject:
