@@ -10,6 +10,7 @@ TagManager:
   - FastShoot
   - Shield
   - HealthPotion
+  - LifeController
   layers:
   - Default
   - TransparentFX
@@ -62,14 +63,14 @@ TagManager:
   - name: Traps
     uniqueID: 4275485179
     locked: 0
-  - name: Guns
-    uniqueID: 610857881
-    locked: 0
   - name: Enemy
     uniqueID: 2890781011
     locked: 0
   - name: Player
     uniqueID: 2323503583
+    locked: 0
+  - name: Guns
+    uniqueID: 610857881
     locked: 0
   - name: Walls
     uniqueID: 1751231777
