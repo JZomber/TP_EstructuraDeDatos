@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -79,7 +80,7 @@ public class LifeSystem : MonoBehaviour
     }
 
     // Restaura la vida del jugador
-    public void HealPlayer(int healAmount)
+    public void HealPlayer(int healAmount, GameObject obj)
     {
         for (int i = 0; i < healAmount; i++)
         {
@@ -95,6 +96,7 @@ public class LifeSystem : MonoBehaviour
                 newHeart.transform.localPosition = lastHeartPosition;
                 hearts.Apilar(newHeart);
                 currentLife++;
+                obj.SetActive(false); // Desactivo el objeto
             }
         }
     }

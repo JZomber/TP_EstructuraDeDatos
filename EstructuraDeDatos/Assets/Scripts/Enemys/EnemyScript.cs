@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    [Header("Enemy Attributes")]
-    public float health;
+    [Header("Enemy Attributes")] public float health;
     public float speed;
 
-    [Header("Player")]
-    public GameObject player;
+    [Header("Player")] public GameObject player;
     private float distance;
 
-    void Update()
+void Update()
     {
         // Perseguir al Jugador
         distance = Vector2.Distance(transform.position, player.transform.position);
@@ -29,7 +27,9 @@ public class EnemyScript : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            Destroy(gameObject);
+            this.GetComponent<CapsuleCollider2D>().enabled = false;
+            this.GetComponent<Animator>().SetTrigger("isDead");
+            // Destroy(gameObject);
         }
     }
 }

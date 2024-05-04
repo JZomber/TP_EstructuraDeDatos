@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Heal : MonoBehaviour
@@ -16,15 +17,12 @@ public class Heal : MonoBehaviour
             if (lifeSystem != null)
             {
                 // Curar al jugador
-                lifeSystem.HealPlayer(healAmount);
+                lifeSystem.HealPlayer(healAmount, this.GameObject());
             }
             else
             {
                 Debug.LogError("No se encontró la instancia de LifeSystem.");
             }
-
-            // Desactivar la pocion
-            gameObject.SetActive(false);
         }
     }
 }
