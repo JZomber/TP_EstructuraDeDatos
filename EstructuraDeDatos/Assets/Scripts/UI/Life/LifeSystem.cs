@@ -28,9 +28,8 @@ public class LifeSystem : MonoBehaviour
     public Image heartPrefab; // Prefab del corazón
     public Transform heartParent; // Padre para los corazones
     private Stack_TDAPila<Image> hearts = new Stack_TDAPila<Image>(); // Pila de imágenes de los corazones
+    private List<Vector3> lostHeartPositions = new List<Vector3>(); // Lista de posiciones de corazones perdidos
     public GameObject player; // Referencia al jugador
-    private float lastHeartXPosition;
-
 
     void Start()
     {
@@ -63,8 +62,8 @@ public class LifeSystem : MonoBehaviour
         // Oculta y elimina el corazón perdido
         if (currentLife < maxLife)
         {
-            lastHeartXPosition = hearts.Tope().transform.localPosition.x;
             Image heartToRemove = hearts.Desapilar();
+            lostHeartPositions.Add(heartToRemove.transform.localPosition); // Guarda la posición del corazón perdido
             heartToRemove.gameObject.SetActive(false);
             Destroy(heartToRemove.gameObject);
         }
@@ -86,14 +85,18 @@ public class LifeSystem : MonoBehaviour
         {
             if (currentLife < maxLife)
             {
-                Vector3 newPosition = new Vector3(lastHeartXPosition, 0f, 0f);
+                // Obtén la última posición perdida y remuévela de la lista
+                Vector3 lastHeartPosition = lostHeartPositions[lostHeartPositions.Count - 1];
+                lostHeartPositions.RemoveAt(lostHeartPositions.Count - 1);
+
+                // Crea un nuevo corazón y lo agrega a la pila
                 Image newHeart = Instantiate(heartPrefab, heartParent);
                 newHeart.gameObject.SetActive(true);
-                newHeart.transform.localPosition = newPosition;
-
+                newHeart.transform.localPosition = lastHeartPosition;
                 hearts.Apilar(newHeart);
                 currentLife++;
             }
         }
     }
 }
+
