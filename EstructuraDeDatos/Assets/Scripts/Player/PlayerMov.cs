@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,9 +12,13 @@ public class PlayerMov : MonoBehaviour
 
     public bool isDead = false;
     
+    private LevelManager lvlManager;
+    
     // Start is called before the first frame update
     void Start()
     {
+        lvlManager = FindObjectOfType<LevelManager>();
+        
         Time.timeScale = 1;
         // animator = GetComponent<Animator>();
     }
@@ -44,6 +49,14 @@ public class PlayerMov : MonoBehaviour
                 animator.SetBool("isRunning", false);
                 animator.SetFloat("Speed", 0);
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Victory"))
+        {
+            StartCoroutine(lvlManager.VictoryScreen(1f));
         }
     }
 }

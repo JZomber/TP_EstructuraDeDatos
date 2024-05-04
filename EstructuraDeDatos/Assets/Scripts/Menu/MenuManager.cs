@@ -5,31 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    public Animator transition;
     public void MenuScreen() //Carga la pantalla "Menú"
     {
         SceneManager.LoadScene("Menu");
     }
     
-    public void VictoryScreen() // Carga la pantalla de victoria
+    public void LoadNextLevel() //Carga el primer nivel
     {
-        SceneManager.LoadScene("Victory");
-    }
-    
-    public void DefeatScreen() // Carga la pantalla de derrota
-    {
-        SceneManager.LoadScene("Defeat");
-    }
-    
-    public void LoadFirstLevel() //Carga el primer nivel
-    {
-        SceneManager.LoadScene("TestScene");
-    }
-    
-    public void LoadSecondLevel() //Carga el segundo nivel
-    {
-        //SceneManager.LoadScene("NOMBRE_DEl_NIVEL");
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
+    IEnumerator LoadLevel(int levelIndex)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1f);
+
+        SceneManager.LoadScene(levelIndex);
+    }
+    
     public void GameQuit() // Quita el juego
     {
         Application.Quit();

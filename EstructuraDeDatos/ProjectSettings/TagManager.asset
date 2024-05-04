@@ -12,6 +12,7 @@ TagManager:
   - HealthPotion
   - LifeController
   - Trap
+  - Victory
   layers:
   - Default
   - TransparentFX

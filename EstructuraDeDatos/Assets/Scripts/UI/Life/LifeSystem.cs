@@ -31,9 +31,12 @@ public class LifeSystem : MonoBehaviour
     private Stack_TDAPila<Image> hearts = new Stack_TDAPila<Image>(); // Pila de imágenes de los corazones
     private List<Vector3> lostHeartPositions = new List<Vector3>(); // Lista de posiciones de corazones perdidos
     public GameObject player; // Referencia al jugador
+    private LevelManager lvlManager;
 
     void Start()
     {
+        lvlManager = FindObjectOfType<LevelManager>();
+        
         currentLife = maxLife; // Configura la vida actual al máximo al inicio
         hearts.InicializarPila(maxLife); // Inicializa la pila con el tamaño máximo de vida
         InstantiateHearts(); // Crea y muestra los corazones
@@ -71,11 +74,12 @@ public class LifeSystem : MonoBehaviour
 
         if (currentLife <= 0)
         {
-            Debug.LogError("Player is already dead!");
+            //Debug.LogError("Player is already dead!");
 
             player.GetComponent<PlayerMov>().isDead = true;
             player.GetComponent<Animator>().SetTrigger("isDead");
-            return;
+
+            StartCoroutine(lvlManager.DefeatScreen(1f)); //Llamo a la función y le paso un delay antes de ejecutarse
         }
     }
 
