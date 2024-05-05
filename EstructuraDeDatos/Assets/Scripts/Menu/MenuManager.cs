@@ -5,38 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public Animator transition;
-
-    public void LoadMenu()
+    // Start is called before the first frame update
+    void Start()
     {
-        StartCoroutine(MenuScreen("Menu"));
-    }
-    public void LoadNextLevel() //Carga el primer nivel
-    {
-        StartCoroutine(LoadLevel(1));
         
-        //StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
-    
-    IEnumerator MenuScreen(string str) //Carga la pantalla "Menú"
-    {
-        transition.SetTrigger("Start");
 
-        yield return new WaitForSeconds(1f);
+    // Update is called once per frame
+    void Update()
+    {
         
-        SceneManager.LoadScene(str);
     }
 
-    IEnumerator LoadLevel(int levelIndex)
+    public void LoadStarterScene()
     {
-        transition.SetTrigger("Start");
-
-        yield return new WaitForSeconds(1f);
-
-        SceneManager.LoadScene(levelIndex);
+        SceneManager.LoadScene(1);
     }
-    
-    public void GameQuit() // Quita el juego
+
+    public void GameQuit()
     {
         Application.Quit();
     }

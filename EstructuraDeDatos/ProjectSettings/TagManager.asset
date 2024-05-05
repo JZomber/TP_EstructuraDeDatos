@@ -6,16 +6,6 @@ TagManager:
   tags:
   - Enemy
   - LifePotion
-  - PowerUp
-  - FastShoot
-  - Shield
-  - HealthPotion
-  - LifeController
-  - Trap
-  - Victory
-  - EnemyBullet
-  - Wall
-  - TpCollider
   layers:
   - Default
   - TransparentFX
@@ -56,14 +46,14 @@ TagManager:
   - name: Ground
     uniqueID: 1547882547
     locked: 0
-  - name: PropsGround
-    uniqueID: 3325709299
-    locked: 0
-  - name: Doors
-    uniqueID: 2782160479
-    locked: 0
   - name: Traps
     uniqueID: 4275485179
+    locked: 0
+  - name: PropsGround
+    uniqueID: 3382578131
+    locked: 0
+  - name: Guns
+    uniqueID: 610857881
     locked: 0
   - name: Enemy
     uniqueID: 2890781011
@@ -71,14 +61,11 @@ TagManager:
   - name: Player
     uniqueID: 2323503583
     locked: 0
-  - name: Guns
-    uniqueID: 610857881
-    locked: 0
   - name: Walls
     uniqueID: 1751231777
     locked: 0
-  - name: PropWalls
-    uniqueID: 239809377
+  - name: PropsWalls
+    uniqueID: 3325709299
     locked: 0
   - name: UI
     uniqueID: 2192670139
