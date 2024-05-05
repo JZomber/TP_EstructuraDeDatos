@@ -14,6 +14,8 @@ public class PlayerPowerUps : MonoBehaviour
     private TDA_Queue tdaQueue;
     private GameObject powerUp;
 
+    public bool isShieldActive;
+
     private CapsuleCollider2D playerCollider;
 
     // Start is called before the first frame update
@@ -34,15 +36,17 @@ public class PlayerPowerUps : MonoBehaviour
             {
                 playerCollider.enabled = false;
                 shieldPrefab.SetActive(true);
+                isShieldActive = true;
             }
             tdaQueue.RemovePowerUp(); //Quito el objeto del TDA Cola
         }
 
         if (shieldPowerUp.damageResist <= 0) //Si la resistencia del escudo termina
         {
+            isShieldActive = false;
             playerCollider.enabled = true;
-            shieldPrefab.SetActive(false);
             shieldPowerUp.damageResist = 5;
+            shieldPrefab.SetActive(false);
         }
     }
     

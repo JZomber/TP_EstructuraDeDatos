@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace PowerUps
-{
+{ 
     public class ShieldPowerUp : MonoBehaviour
     {
         public int damageResist = 5;

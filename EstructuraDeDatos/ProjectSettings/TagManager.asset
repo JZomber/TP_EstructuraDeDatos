@@ -15,6 +15,7 @@ TagManager:
   - Victory
   - EnemyBullet
   - Wall
+  - TpCollider
   layers:
   - Default
   - TransparentFX

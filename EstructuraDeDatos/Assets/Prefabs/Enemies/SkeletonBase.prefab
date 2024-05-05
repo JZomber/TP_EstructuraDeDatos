@@ -227,9 +227,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingOrig: {fileID: 7468041748597094895}
   bulletPrefab: {fileID: 3469022813990914431, guid: 11083193d708d3f4b97955819a8177c3, type: 3}
-  shootCoolDown: 3
-  canShoot: 1
+  shootCoolDown: 1.5
   weapon: {fileID: 4325558759717067236}
+  canShoot: 1
 --- !u!95 &461635680555895
 Animator:
   serializedVersion: 5

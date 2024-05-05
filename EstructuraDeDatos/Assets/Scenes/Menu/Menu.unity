@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1947825897506007929, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2210519184936345865, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -186,7 +190,7 @@ PrefabInstance:
     - target: {fileID: 6379265234640369316, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1942621329}
     - target: {fileID: 6512463128250839290, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
       propertyPath: player
       value: 
@@ -5349,6 +5353,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1862251105}
     m_Modifications:
+    - target: {fileID: 550388217809543280, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2705700512366788034, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
       propertyPath: m_Name
       value: PlayerRogue
@@ -5424,6 +5432,10 @@ PrefabInstance:
     - target: {fileID: 8819191070123331768, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826130604632612161, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5679,6 +5691,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1862251105}
     m_Modifications:
+    - target: {fileID: 116338031683196371, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 706128051973422528, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
       propertyPath: m_Name
       value: SkeletonBase
@@ -5750,6 +5766,14 @@ PrefabInstance:
     - target: {fileID: 5345829533370710360, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
       propertyPath: m_FlipX
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771353771080875476, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105829387005961122, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5023706736786106291, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}

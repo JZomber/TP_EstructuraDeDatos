@@ -6,14 +6,25 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     public Animator transition;
-    public void MenuScreen() //Carga la pantalla "Menú"
+
+    public void LoadMenu()
     {
-        SceneManager.LoadScene("Menu");
+        StartCoroutine(MenuScreen("Menu"));
     }
-    
     public void LoadNextLevel() //Carga el primer nivel
     {
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        StartCoroutine(LoadLevel(1));
+        
+        //StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+    }
+    
+    IEnumerator MenuScreen(string str) //Carga la pantalla "Menú"
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1f);
+        
+        SceneManager.LoadScene(str);
     }
 
     IEnumerator LoadLevel(int levelIndex)

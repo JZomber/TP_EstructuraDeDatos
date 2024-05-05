@@ -1,4 +1,5 @@
 using System;
+using PowerUps;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -15,11 +16,14 @@ public class PlayerDamage : MonoBehaviour
     public Color damageColor; // Color que indica cuando el player recibe daño
     private SpriteRenderer rend; //Sprite del player
 
+    private PlayerPowerUps playerPowerUps;
+
     void Start()
     {
         lifeSystem = FindObjectOfType<LifeSystem>(); // Encuentra el script LifeSystem
         rend = GetComponent<SpriteRenderer>();
         playerCollider = GetComponent<CapsuleCollider2D>();
+        playerPowerUps = FindObjectOfType<PlayerPowerUps>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -36,7 +40,7 @@ public class PlayerDamage : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other) // Si el jugador se queda encima de una trampa
     {
-        if (other.CompareTag("Trap") && canTakeDamage) //Si el jugador colisiona y/o se queda en la trampa, recibe daño
+        if (other.CompareTag("Trap") && canTakeDamage && playerPowerUps.isShieldActive == false) //Si el jugador colisiona y/o se queda en la trampa, recibe daño
         {
             lifeSystem.TakeDamage(1); // Reduce la vida del jugador en 1
             canTakeDamage = false; // Deshabilita la capacidad de tomar daño temporalmente

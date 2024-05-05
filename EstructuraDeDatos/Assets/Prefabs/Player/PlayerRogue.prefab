@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageCooldownTime: 0.5
-  defaultColor: {r: 1, g: 1, b: 1, a: 0}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
   damageColor: {r: 1, g: 0, b: 0, a: 0.39215687}
 --- !u!114 &550388217809543280
 MonoBehaviour:

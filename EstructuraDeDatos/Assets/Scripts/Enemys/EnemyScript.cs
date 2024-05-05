@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -11,7 +12,14 @@ public class EnemyScript : MonoBehaviour
     [Header("Player")] public GameObject player;
     private float distance;
 
-void Update()
+    private LevelManager LevelManager;
+
+    private void Start()
+    {
+        LevelManager = FindObjectOfType<LevelManager>();
+    }
+
+    void Update()
     {
         // Perseguir al Jugador
         distance = Vector2.Distance(transform.position, player.transform.position);
@@ -28,6 +36,7 @@ void Update()
         health -= damage;
         if (health <= 0)
         {
+            LevelManager.enemyCounter++;
             this.GetComponent<CapsuleCollider2D>().enabled = false;
             this.GetComponent<Animator>().SetTrigger("isDead");
 

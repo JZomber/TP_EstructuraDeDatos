@@ -58,5 +58,10 @@ public class PlayerMov : MonoBehaviour
         {
             StartCoroutine(lvlManager.VictoryScreen(1f));
         }
+
+        if (other.CompareTag("TpCollider"))
+        {
+            lvlManager.TpWaypoint();
+        }
     }
 }

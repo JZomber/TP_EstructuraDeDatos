@@ -4619,6 +4619,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5771353771080875476, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
+      propertyPath: canShoot
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6127,7 +6131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bdc8891e03c27a4384394b5735d7d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 50
+  maxLife: 3
   heartPrefab: {fileID: 3385922777325120859, guid: e1867ef499f9afc45927d716898a49a3, type: 3}
   heartParent: {fileID: 508710200}
   player: {fileID: 1458859689}
@@ -7295,6 +7299,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4612643403787525561, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771353771080875476, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
+      propertyPath: canShoot
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
