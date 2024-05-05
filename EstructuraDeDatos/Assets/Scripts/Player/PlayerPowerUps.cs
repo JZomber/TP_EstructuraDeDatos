@@ -8,22 +8,27 @@ using UnityEngine;
 
 public class PlayerPowerUps : MonoBehaviour
 {
-    public GameObject shieldPrefab;
-    private ShieldPowerUp shieldPowerUp;
+    public GameObject shieldPrefab; //Prefab del escudo
+    private ShieldPowerUp shieldPowerUp; //Script del powerUp de escudo
+    public bool isShieldActive; //Bool si está activo el escudo
     
-    private TDA_Queue tdaQueue;
-    private GameObject powerUp;
+    private TDA_Queue tdaQueue; //Script de la lista de power ups
+    private GameObject powerUp; //Objeto de la lista de power ups
 
-    public bool isShieldActive;
+    private LifeSystem lifeSystem; //Script del sistema de vidas
 
-    private CapsuleCollider2D playerCollider;
+    private PlayerShoot playerShoot; //Script que le permite al player disparar
+
+    private CapsuleCollider2D playerCollider; //Collider del player (Cápsula)
 
     // Start is called before the first frame update
     void Start()
     {
-        shieldPowerUp = shieldPrefab.GetComponent<ShieldPowerUp>();
-        playerCollider = this.GameObject().GetComponent<CapsuleCollider2D>();
-        tdaQueue = FindObjectOfType<TDA_Queue>(); // Busca el script TDA_Queue
+        shieldPowerUp = shieldPrefab.GetComponent<ShieldPowerUp>(); //Script del escudo (powerUp)
+        playerCollider = this.GameObject().GetComponent<CapsuleCollider2D>(); //Collider del player
+        tdaQueue = FindObjectOfType<TDA_Queue>(); // Busca el script TDA Queue
+        lifeSystem = FindObjectOfType<LifeSystem>(); // Busca el script del TDA Pila
+        playerShoot = FindObjectOfType<PlayerShoot>(); // Busca el script que le permite al player disparar
     }
 
     void Update()
@@ -38,6 +43,17 @@ public class PlayerPowerUps : MonoBehaviour
                 shieldPrefab.SetActive(true);
                 isShieldActive = true;
             }
+
+            if (powerUp.name == "HealthUp") // Si el objeto es para recuperar vida
+            {
+                lifeSystem.HealPlayer(2, powerUp.gameObject);
+            }
+            
+            if (powerUp.name == "FastShoot") // Si el objeto es para mayor disparo
+            {
+                playerShoot.isPowerActive = true;
+            }
+            
             tdaQueue.RemovePowerUp(); //Quito el objeto del TDA Cola
         }
 

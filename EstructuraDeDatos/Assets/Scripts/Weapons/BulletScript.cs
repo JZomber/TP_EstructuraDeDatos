@@ -23,7 +23,7 @@ namespace Weapons
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (targetEnemy && collision.CompareTag("Enemy"))
+            if (targetEnemy && collision.CompareTag("Enemy")) //Si la bala colisiona Enemy y es un objetivo del mismo
             {
                 EnemyScript enemy = collision.GetComponent<EnemyScript>();
 
@@ -34,14 +34,14 @@ namespace Weapons
                 }
             }
 
-            if (!targetEnemy && collision.CompareTag("Shield"))
+            if (!targetEnemy && collision.CompareTag("Shield")) //Si la bala colisiona con un escudo y Enemy no es objetivo
             {
                 var shield = collision.gameObject.GetComponent<ShieldPowerUp>();
                 shield.damageResist -= 1;
                 Destroy(gameObject);
             }
 
-            if (collision.CompareTag("Wall"))
+            if (collision.CompareTag("Wall")) //Colisión con una pared
             {
                 Destroy(gameObject);
             }

@@ -46,4 +46,19 @@ public class EnemyScript : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Shield"))
+        {
+            LevelManager.enemyCounter++;
+            this.GetComponent<CapsuleCollider2D>().enabled = false;
+            this.GetComponent<Animator>().SetTrigger("isDead");
+
+            if (this.GetComponentInChildren<RangedEnemy>())
+            {
+                this.GetComponentInChildren<RangedEnemy>().canShoot = false;
+            }
+        }
+    }
 }

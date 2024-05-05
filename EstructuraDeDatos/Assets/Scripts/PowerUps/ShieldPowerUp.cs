@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace PowerUps
@@ -10,6 +11,15 @@ namespace PowerUps
         {
             if (damageResist <= 0)
             {
+                this.gameObject.SetActive(false);
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Enemy"))
+            {
+                damageResist = 0;
                 this.gameObject.SetActive(false);
             }
         }
