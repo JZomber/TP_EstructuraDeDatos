@@ -16980,7 +16980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLife: 3
-  heartPrefab: {fileID: 3385922777325120859, guid: e1867ef499f9afc45927d716898a49a3, type: 3}
+  heartPrefab: {fileID: 6331390066630487331, guid: f98724ad0c748c24c85e6bf409b659b1, type: 3}
   heartParent: {fileID: 1359032307}
   player: {fileID: 1565893358}
 --- !u!4 &1748143704
