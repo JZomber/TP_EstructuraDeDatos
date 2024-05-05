@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
@@ -29,7 +30,11 @@ void Update()
         {
             this.GetComponent<CapsuleCollider2D>().enabled = false;
             this.GetComponent<Animator>().SetTrigger("isDead");
-            // Destroy(gameObject);
+
+            if (this.GetComponentInChildren<RangedEnemy>())
+            {
+                this.GetComponentInChildren<RangedEnemy>().canShoot = false;
+            }
         }
     }
 }

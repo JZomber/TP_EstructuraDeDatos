@@ -13,6 +13,8 @@ TagManager:
   - LifeController
   - Trap
   - Victory
+  - EnemyBullet
+  - Wall
   layers:
   - Default
   - TransparentFX

@@ -13,7 +13,7 @@ public class PlayerShoot : MonoBehaviour
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            var rotation = transform.rotation;
+            var rotation = shootingOrig.rotation;
             rotation *=  Quaternion.Euler(0, 0, -90);
             Instantiate(bulletPrefab, shootingOrig.position, rotation);
         }

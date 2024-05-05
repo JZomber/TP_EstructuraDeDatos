@@ -11,6 +11,7 @@ namespace UI.PowerUps
         
         private QueueTdaCola<GameObject> powerUpsQueue = new QueueTdaCola<GameObject>(); //Cola de powerUps
         private int maxSize = 3; //Tamaño del array
+        public GameObject currentPowerUp;
         
         public Transform powerUpsParent; //Punto donde aparecen en UI
         public GameObject player; //Referencia al jugador
@@ -43,7 +44,8 @@ namespace UI.PowerUps
         private void UpdatePowerUpDisplay()
         {
             GameObject firstPowerUp = powerUpsQueue.First(); //Obtengo la referencia al primer objeto en entrar
-            
+            currentPowerUp = firstPowerUp;
+                
             for (int i = 0; i < powerUpsImg.Length; i++)
             {
                 if (firstPowerUp.name == powerUpsImg[i].name) //Comparo el nombre del objeto con el de las imágenes
