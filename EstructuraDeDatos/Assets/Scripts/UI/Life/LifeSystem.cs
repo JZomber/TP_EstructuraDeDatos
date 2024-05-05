@@ -78,6 +78,7 @@ public class LifeSystem : MonoBehaviour
 
             player.GetComponent<PlayerMov>().isDead = true;
             player.GetComponent<Animator>().SetTrigger("isDead");
+            player.GetComponent<PlayerShoot>().canShoot = false;
 
             StartCoroutine(lvlManager.DefeatScreen(1f)); //Llamo a la función y le paso un delay antes de ejecutarse
         }

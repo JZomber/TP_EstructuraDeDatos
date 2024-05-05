@@ -184,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageCooldownTime: 0.5
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  damageColor: {r: 1, g: 0, b: 0, a: 0.39215687}
+  damageColor: {r: 1, g: 0, b: 0, a: 0.78431374}
 --- !u!114 &550388217809543280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +199,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingOrig: {fileID: 745025976618788490}
   bulletPrefab: {fileID: 3469022813990914431, guid: e34478b9c18b39645a6f5492dd70fc52, type: 3}
+  weapon: {fileID: 5904911308614289025}
+  isPowerActive: 0
+  canShoot: 1
 --- !u!114 &8826130604632612161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shieldPrefab: {fileID: 4882282971608238334}
+  isShieldActive: 0
 --- !u!95 &8704498652214533481
 Animator:
   serializedVersion: 5
@@ -415,5 +419,10 @@ Transform:
 --- !u!4 &3607007000915564307 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6844201568584190483, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
+  m_PrefabInstance: {fileID: 7851415520263445760}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5904911308614289025 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4397660984528788353, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
   m_PrefabInstance: {fileID: 7851415520263445760}
   m_PrefabAsset: {fileID: 0}

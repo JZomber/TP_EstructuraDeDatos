@@ -67,6 +67,7 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator DefeatScreen(float delay) //Pantalla de derrota
     {
+        yield return new WaitForSeconds(delay);
         transition.SetTrigger("Start");
         
         yield return new WaitForSeconds(delay);

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,9 +9,12 @@ public class PlayerShoot : MonoBehaviour
 {
     public Transform shootingOrig; //Origen de las balas
     public GameObject bulletPrefab; //Prefab de las balas (player)
+    public GameObject weapon;
 
     public bool isPowerActive; //Poder de disparo
     private float timePowerUp = 6f; //Duración del power up
+
+    public bool canShoot = true;
 
     // Update is called once per frame
     void Update()
@@ -30,6 +35,11 @@ public class PlayerShoot : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame) //Cada vez que se presione el mouse
         {
             StartCoroutine(PlayerShooting(bulletPrefab, shootingOrig, 0.15f)); //Prefab, Origen, Delay
+        }
+        
+        if (!canShoot)
+        {
+         weapon.GameObject().SetActive(false);   
         }
     }
 
