@@ -1,16 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    [Header("Enemy Attributes")]
-    public float health;
+    [Header("Enemy Attributes")] public float health;
     public float speed;
 
-    [Header("Player")]
-    public GameObject player;
+    [Header("Player")] public GameObject player;
     private float distance;
+
+    private LevelManager LevelManager;
+
+    private void Start()
+    {
+        LevelManager = FindObjectOfType<LevelManager>();
+    }
 
     void Update()
     {
@@ -29,7 +36,29 @@ public class EnemyScript : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            Destroy(gameObject);
+            LevelManager.enemyCounter++;
+            this.GetComponent<CapsuleCollider2D>().enabled = false;
+            this.GetComponent<Animator>().SetTrigger("isDead");
+
+            if (this.GetComponentInChildren<RangedEnemy>())
+            {
+                this.GetComponentInChildren<RangedEnemy>().canShoot = false;
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Shield"))
+        {
+            LevelManager.enemyCounter++;
+            this.GetComponent<CapsuleCollider2D>().enabled = false;
+            this.GetComponent<Animator>().SetTrigger("isDead");
+
+            if (this.GetComponentInChildren<RangedEnemy>())
+            {
+                this.GetComponentInChildren<RangedEnemy>().canShoot = false;
+            }
         }
     }
 }

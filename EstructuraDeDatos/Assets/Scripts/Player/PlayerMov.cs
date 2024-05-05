@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +10,15 @@ public class PlayerMov : MonoBehaviour
     //private Animator animator;
     [SerializeField] private Animator animator;
 
+    public bool isDead = false;
+    
+    private LevelManager lvlManager;
+    
     // Start is called before the first frame update
     void Start()
     {
+        lvlManager = FindObjectOfType<LevelManager>();
+        
         Time.timeScale = 1;
         // animator = GetComponent<Animator>();
     }
@@ -19,26 +26,42 @@ public class PlayerMov : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float inputX = Input.GetAxisRaw("Horizontal");
-        float inputY = Input.GetAxisRaw("Vertical");
+        if (!isDead)
+        {
+            float inputX = Input.GetAxisRaw("Horizontal");
+            float inputY = Input.GetAxisRaw("Vertical");
 
-        transform.position += new Vector3(inputX, inputY, 0) * (speedMov * Time.deltaTime);
+            transform.position += new Vector3(inputX, inputY, 0) * (speedMov * Time.deltaTime);
         
-        if (inputY > 0 || inputY < 0)
-        {
-            animator.SetBool("isRunning", true); // Condición para la transición
-            animator.SetFloat("Speed", Mathf.Abs(inputY)); //Independientemente del input, siempre da positivo
+            if (inputY > 0 || inputY < 0)
+            {
+                animator.SetBool("isRunning", true); // Condición para la transición
+                animator.SetFloat("Speed", Mathf.Abs(inputY)); //Independientemente del input, siempre da positivo
+            }
+            else if (inputX > 0 || inputX < 0)
+            {
+                animator.SetBool("isRunning", true);
+                animator.SetFloat("Speed", Mathf.Abs(inputX));
+            }
+            else
+            {
+                //Vuelve a "Idle"
+                animator.SetBool("isRunning", false);
+                animator.SetFloat("Speed", 0);
+            }
         }
-        else if (inputX > 0 || inputX < 0)
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Victory"))
         {
-            animator.SetBool("isRunning", true);
-            animator.SetFloat("Speed", Mathf.Abs(inputX));
+            StartCoroutine(lvlManager.VictoryScreen(1f));
         }
-        else
+
+        if (other.CompareTag("TpCollider"))
         {
-            //Vuelve a "Idle"
-            animator.SetBool("isRunning", false);
-            animator.SetFloat("Speed", 0);
+            lvlManager.TpWaypoint();
         }
     }
 }
