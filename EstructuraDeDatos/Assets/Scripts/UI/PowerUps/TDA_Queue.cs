@@ -33,6 +33,7 @@ namespace UI.PowerUps
         {
             powerUpsQueue.DesAcolar();
             Destroy(currentImg);
+            currentPowerUp = null;
             UpdatePowerUpDisplay();
         }
 
