@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ABB : MonoBehaviour
 {
+
     public class NodoABB
     {
         public EnemyScript enemy;
@@ -53,6 +54,7 @@ public class ABB : MonoBehaviour
 
     public void RecorrerEnOrdenAscendente(Action<EnemyScript> callback)
     {
+        //GameObject.Find("CodexManager").GetComponent<CodexManager>().FillInfo(nodo);
         RecorrerAscendenteRecursivo(raiz, callback);
     }
 

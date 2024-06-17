@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
+    public Sprite EnemySprite;
     [Header("Enemy Attributes")] public float health;
     public float speed;
 
@@ -17,6 +19,7 @@ public class EnemyScript : MonoBehaviour
     private void Start()
     {
         LevelManager = FindObjectOfType<LevelManager>();
+        EnemySprite = gameObject.GetComponent<SpriteRenderer>().sprite;
     }
 
     void Update()
