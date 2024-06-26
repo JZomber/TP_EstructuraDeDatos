@@ -31,19 +31,19 @@ public class CodexController : MonoBehaviour
         SortByHealthAsc(); // Ordenar por defecto al iniciar
     }
 
-    void SortByHealthAsc()
+    public void SortByHealthAsc()
     {
         ClearContent();
         arbol.RecorrerEnOrdenAscendente(AddEnemyCard);
     }
 
-    void SortByHealthDesc()
+    public void SortByHealthDesc()
     {
         ClearContent();
         arbol.RecorrerEnOrdenDescendente(AddEnemyCard);
     }
 
-    void SortByName()
+    public void SortByName()
     {
         ClearContent();
         arbol.RecorrerPorNombre(AddEnemyCard);
