@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
+    public string enemyName; // Añadido: Nombre del enemigo
     public Sprite EnemySprite;
     [Header("Enemy Attributes")] public float health;
     public float speed;

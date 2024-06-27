@@ -210,6 +210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e005e6122103744a9a0faed905b49e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyName: Skeleton AA
+  EnemySprite: {fileID: 4806371549170660726, guid: 406ecb0b9ba7ba44598f71df4973e55c, type: 3}
   health: 100
   speed: 0
   player: {fileID: 2705700512366788034, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
