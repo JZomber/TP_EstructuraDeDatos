@@ -1,0 +1,29 @@
+{
+    "scores": [
+        {
+            "playerName": "Charizard",
+            "completionTime": 30.5
+        },
+        {
+            "playerName": "Waifu62",
+            "completionTime": 25.0
+        },
+        {
+            "playerName": "MotoMoto",
+            "completionTime": 40.2
+        },
+        {
+            "playerName": "Agumon",
+            "completionTime": 22.8
+        },
+        {
+            "playerName": "Sape",
+            "completionTime": 35.1
+        },
+        {
+            "playerName": "Akira Toriyama",
+            "completionTime": 7.0
+        }
+    ]
+}
+
