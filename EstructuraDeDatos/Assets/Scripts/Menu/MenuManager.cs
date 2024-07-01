@@ -11,19 +11,28 @@ public class MenuManager : MonoBehaviour
     {
         StartCoroutine(MenuScreen("Menu"));
     }
-    public void LoadNextLevel() //Carga el primer nivel
+
+    public void LoadNextLevel() // Carga el primer nivel
     {
         StartCoroutine(LoadLevel(1));
-        
-        //StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
-    
-    IEnumerator MenuScreen(string str) //Carga la pantalla "Menú"
+
+    public void LoadCodex() // Carga la escena del Codex
+    {
+        StartCoroutine(LoadScene("Codex"));
+    }
+
+    public void LoadScore() // Carga la escena de Score
+    {
+        StartCoroutine(LoadScene("Score"));
+    }
+
+    IEnumerator MenuScreen(string str) // Carga la pantalla "Menú"
     {
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(1f);
-        
+
         SceneManager.LoadScene(str);
     }
 
@@ -35,7 +44,16 @@ public class MenuManager : MonoBehaviour
 
         SceneManager.LoadScene(levelIndex);
     }
-    
+
+    IEnumerator LoadScene(string sceneName)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1f);
+
+        SceneManager.LoadScene(sceneName);
+    }
+
     public void GameQuit() // Quita el juego
     {
         Application.Quit();
