@@ -1,16 +1,18 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
     public List<ScoreData> scores = new List<ScoreData>();
+    public TextMeshProUGUI[] scoreTexts; // Arreglo de campos de texto para mostrar los puntajes
 
     void Start()
     {
         LoadScoresFromJSON();
         SortScoresByCompletionTime();
-        PrintScores(); // Imprimir las puntuaciones ordenadas en la consola
+        UpdateScoreTexts(); // Actualizar los campos de texto con los mejores 6 puntajes
     }
 
     void LoadScoresFromJSON()
@@ -58,12 +60,13 @@ public class ScoreManager : MonoBehaviour
 
     int Partition(List<ScoreData> arr, int low, int high)
     {
-        float pivot = arr[high].completionTime;
+        ScoreData pivot = arr[high];
         int i = (low - 1);
 
         for (int j = low; j < high; j++)
         {
-            if (arr[j].completionTime < pivot)
+            if (arr[j].completionTime < pivot.completionTime ||
+                (arr[j].completionTime == pivot.completionTime && string.Compare(arr[j].playerName, pivot.playerName) < 0))
             {
                 i++;
                 ScoreData temp = arr[i];
@@ -77,6 +80,21 @@ public class ScoreManager : MonoBehaviour
         arr[high] = temp2;
 
         return i + 1;
+    }
+
+    void UpdateScoreTexts()
+    {
+        for (int i = 0; i < scoreTexts.Length; i++)
+        {
+            if (i < scores.Count)
+            {
+                scoreTexts[i].text = (i + 1) + ". " + scores[i].playerName + ": " + scores[i].completionTime + "s";
+            }
+            else
+            {
+                scoreTexts[i].text = "";
+            }
+        }
     }
 
     void PrintScores()
@@ -101,4 +119,3 @@ public class ScoreList
 {
     public List<ScoreData> scores;
 }
-
