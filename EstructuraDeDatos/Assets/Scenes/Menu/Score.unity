@@ -3687,7 +3687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a66e0ac19b2c14b9f4a1ffc8ffcf64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scores: []
+  quickSortData: {fileID: 11400000, guid: d797e36c3662da1488cbc15aa8292e1f, type: 2}
   scoreTexts:
   - {fileID: 1940120046}
   - {fileID: 459975744}
@@ -5429,6 +5429,14 @@ PrefabInstance:
     - target: {fileID: 6512463128250839290, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
       propertyPath: player
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7333752199176163831, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 263
+      objectReference: {fileID: 0}
+    - target: {fileID: 7333752199176163831, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -180.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

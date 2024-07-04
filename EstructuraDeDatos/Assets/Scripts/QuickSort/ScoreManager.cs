@@ -1,51 +1,46 @@
 using UnityEngine;
-using System.Collections.Generic;
-using System.IO;
 using TMPro;
+using System.Collections.Generic;
 
 public class ScoreManager : MonoBehaviour
 {
-    public List<ScoreData> scores = new List<ScoreData>();
-    public TextMeshProUGUI[] scoreTexts; // Arreglo de campos de texto para mostrar los puntajes
+    public QuickSortData quickSortData;
+    public TextMeshProUGUI[] scoreTexts;
 
     void Start()
     {
-        LoadScoresFromJSON();
-        SortScoresByCompletionTime();
-        UpdateScoreTexts(); // Actualizar los campos de texto con los mejores 6 puntajes
+        UpdateScoreDisplay();
     }
 
-    void LoadScoresFromJSON()
+    public void UpdateScoreDisplay()
     {
-        string jsonPath = Application.dataPath + "/Scripts/QuickSort/scores.json";
-        Debug.Log("Ruta del archivo JSON: " + jsonPath);
-
-        if (File.Exists(jsonPath))
+        // Crear una lista de ScoreData a partir del QuickSortData
+        List<ScoreData> scores = new List<ScoreData>
         {
-            string jsonData = File.ReadAllText(jsonPath);
-            Debug.Log("Datos JSON cargados: " + jsonData);
+            new ScoreData { playerName = quickSortData.PlayerName1, completionTime = quickSortData.ScorePlayer1 },
+            new ScoreData { playerName = quickSortData.PlayerName2, completionTime = quickSortData.ScorePlayer2 },
+            new ScoreData { playerName = quickSortData.PlayerName3, completionTime = quickSortData.ScorePlayer3 },
+            new ScoreData { playerName = quickSortData.PlayerName4, completionTime = quickSortData.ScorePlayer4 },
+            new ScoreData { playerName = quickSortData.PlayerName5, completionTime = quickSortData.ScorePlayer5 },
+            new ScoreData { playerName = quickSortData.PlayerName6, completionTime = quickSortData.ScorePlayer6 },
+            new ScoreData { playerName = "Player", completionTime = quickSortData.mainPlayerTime }
+        };
 
-            // Deserializar el objeto JSON que contiene la lista de puntuaciones
-            ScoreList scoreList = JsonUtility.FromJson<ScoreList>(jsonData);
-            scores = scoreList.scores;
+        // Ordenar los puntajes usando QuickSort
+        Quicksort(scores, 0, scores.Count - 1);
 
-            Debug.Log("Puntuaciones cargadas desde el JSON:");
-            foreach (var score in scores)
+        // Mostrar los 6 mejores puntajes
+        for (int i = 0; i < scoreTexts.Length; i++)
+        {
+            if (i < scores.Count)
             {
-                Debug.Log("Jugador: " + score.playerName + ", Tiempo: " + score.completionTime);
+                scoreTexts[i].text = scores[i].playerName + ": " + scores[i].completionTime.ToString("F2") + "s";
+            }
+            else
+            {
+                scoreTexts[i].text = "";
             }
         }
-        else
-        {
-            Debug.LogError("No se encontró el archivo JSON en la ruta especificada.");
-        }
-    }
-
-    void SortScoresByCompletionTime()
-    {
-        Debug.Log("Ordenando puntuaciones...");
-        Quicksort(scores, 0, scores.Count - 1);
-        Debug.Log("Puntuaciones ordenadas.");
     }
 
     void Quicksort(List<ScoreData> arr, int low, int high)
@@ -60,13 +55,12 @@ public class ScoreManager : MonoBehaviour
 
     int Partition(List<ScoreData> arr, int low, int high)
     {
-        ScoreData pivot = arr[high];
+        float pivot = arr[high].completionTime;
         int i = (low - 1);
 
         for (int j = low; j < high; j++)
         {
-            if (arr[j].completionTime < pivot.completionTime ||
-                (arr[j].completionTime == pivot.completionTime && string.Compare(arr[j].playerName, pivot.playerName) < 0))
+            if (arr[j].completionTime < pivot)
             {
                 i++;
                 ScoreData temp = arr[i];
@@ -81,30 +75,6 @@ public class ScoreManager : MonoBehaviour
 
         return i + 1;
     }
-
-    void UpdateScoreTexts()
-    {
-        for (int i = 0; i < scoreTexts.Length; i++)
-        {
-            if (i < scores.Count)
-            {
-                scoreTexts[i].text = (i + 1) + ". " + scores[i].playerName + ": " + scores[i].completionTime + "s";
-            }
-            else
-            {
-                scoreTexts[i].text = "";
-            }
-        }
-    }
-
-    void PrintScores()
-    {
-        Debug.Log("Puntuaciones ordenadas:");
-        foreach (var score in scores)
-        {
-            Debug.Log("Jugador: " + score.playerName + ", Tiempo: " + score.completionTime);
-        }
-    }
 }
 
 [System.Serializable]
@@ -112,10 +82,4 @@ public class ScoreData
 {
     public string playerName;
     public float completionTime;
-}
-
-[System.Serializable]
-public class ScoreList
-{
-    public List<ScoreData> scores;
 }

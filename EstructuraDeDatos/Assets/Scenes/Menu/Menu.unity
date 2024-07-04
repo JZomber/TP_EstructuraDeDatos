@@ -2223,52 +2223,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &474852577
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 474852579}
-  - component: {fileID: 474852578}
-  m_Layer: 0
-  m_Name: ScoresQuickSortTest
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &474852578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 474852577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30a66e0ac19b2c14b9f4a1ffc8ffcf64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scores: []
-  scoreTexts: []
---- !u!4 &474852579
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 474852577}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4782861, y: 2.9607997, z: -1.0050511}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &591494434
 GameObject:
   m_ObjectHideFlags: 0
@@ -8512,4 +8466,3 @@ SceneRoots:
   - {fileID: 1905009138}
   - {fileID: 1208896461}
   - {fileID: 1862251105}
-  - {fileID: 474852579}

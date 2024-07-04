@@ -20,7 +20,11 @@ public class LevelManager : MonoBehaviour
     public Animator transition; //Transición entre escenas
 
     public int enemyCounter; //Enemigos elminados
-    
+
+    public QuickSortData quickSortData;
+
+    private float startTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +39,8 @@ public class LevelManager : MonoBehaviour
             {
                 waypoints[i] = holderWaypoints.transform.GetChild(i).transform;
             }
+
+            startTime = Time.time; // Inicializar el tiempo de inicio del nivel
         }
     }
     
@@ -59,6 +65,15 @@ public class LevelManager : MonoBehaviour
     
     public IEnumerator VictoryScreen(float delay) //Pantalla de victoria
     {
+
+        float playerTime = Time.time - startTime; // Calcular el tiempo del jugador
+        quickSortData.mainPlayerTime = playerTime; // Actualizar el tiempo del jugador en QuickSortData
+
+        if (playerTime < quickSortData.MainPlayerRecordTime)
+        {
+            quickSortData.SetNewRecord(playerTime); // Actualizar el récord si es un nuevo mejor tiempo
+        }
+
         transition.SetTrigger("Start");
         
         yield return new WaitForSeconds(delay);

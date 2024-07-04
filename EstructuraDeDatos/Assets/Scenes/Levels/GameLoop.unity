@@ -17075,6 +17075,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6512463128250839290, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
+      propertyPath: quickSortData
+      value: 
+      objectReference: {fileID: 11400000, guid: d797e36c3662da1488cbc15aa8292e1f, type: 2}
+    - target: {fileID: 6512463128250839290, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
       propertyPath: holderColliders
       value: 
       objectReference: {fileID: 737693983}
