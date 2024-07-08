@@ -38,3 +38,7 @@ public class GrafoManager : MonoBehaviour
         enemy.currentNode = grafo.Nodes["0"]; // Starter Node
     }
 }
+
+// Enemigo dijkstra pueda recibir daño
+// Enemigo adicional en el grafo (aparición con delay, ya sea tiempo o que el otro enemigo esté a mitad de vida).
+// Audio en general
