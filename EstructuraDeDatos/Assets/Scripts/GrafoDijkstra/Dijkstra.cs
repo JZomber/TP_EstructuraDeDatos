@@ -11,7 +11,7 @@ public class Dijkstra
 
         foreach (var node in allNodes.Values)
         {
-            distances[node] = float.MaxValue;
+            distances[node] = float.MaxValue; // Set nodes dist to (inf)
         }
 
         distances[startNode] = 0;
@@ -19,12 +19,12 @@ public class Dijkstra
 
         while (priorityQueue.Count > 0)
         {
-            Node currentNode = priorityQueue.Dequeue();
+            Node currentNode = priorityQueue.Dequeue(); // Return current node
 
             foreach (Edge edge in currentNode.Edges)
             {
                 float newDist = distances[currentNode] + edge.Cost;
-                if (newDist < distances[edge.Target])
+                if (newDist < distances[edge.Target]) // Node distance (float) < Target distance (inf)
                 {
                     distances[edge.Target] = newDist;
                     priorityQueue.Enqueue(edge.Target, newDist);

@@ -51,15 +51,15 @@ public class EnemyDijkstra : MonoBehaviour
 
     private void FindNextPath()
     {
-        var shortestPaths = Dijkstra.FindShortestPaths(currentNode, grafo.Nodes);
+        var shortestPaths = Dijkstra.FindShortestPaths(currentNode, grafo.Nodes); // Returns Distance
         Node nextNode = null;
-        float shortestDistance = float.MaxValue;
+        float shortestDistance = float.MaxValue; // inf
 
         foreach (var edge in currentNode.Edges)
         {
             if (shortestPaths.ContainsKey(edge.Target) && shortestPaths[edge.Target] < shortestDistance && !visitedNodes.Contains(edge.Target))
             {
-                shortestDistance = shortestPaths[edge.Target];
+                shortestDistance = shortestPaths[edge.Target]; // Shortest distance => Target Node's distance
                 nextNode = edge.Target;
                 Debug.Log($"SIGUIENTE NODO {edge.Target.Name}");
             }
