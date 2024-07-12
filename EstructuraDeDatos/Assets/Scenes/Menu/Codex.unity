@@ -5587,7 +5587,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Health \nAscending"
+  m_text: "Health \nDescending"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c9198d9f3feacc2448cc579825e57205, type: 2}
   m_sharedMaterial: {fileID: -1974649274578116285, guid: c9198d9f3feacc2448cc579825e57205, type: 2}
