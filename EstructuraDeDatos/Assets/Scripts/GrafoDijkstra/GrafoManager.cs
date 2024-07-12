@@ -8,9 +8,8 @@ public class GrafoManager : MonoBehaviour
     
     public GameObject enemyPrefab;
     private Grafo grafo;
-    
-    void Start()
-    {
+    private Grafo extraGrafo;
+    private string initialNode = "0";
     List<(int, int)> connections = new List<(int, int)>()
     {
         // (FROM / TO)
@@ -26,16 +25,33 @@ public class GrafoManager : MonoBehaviour
         (9, 8), (9, 10),
         (10, 9), (10, 11),
         (11, 10), (11, 6), (11, 3)
-        
     };
-        
+    
+    void Start()
+    {
         grafo = new Grafo();
         grafo.Initialize(nodeTransforms, connections);
 
         GameObject enemyObject = Instantiate(enemyPrefab);
         EnemyDijkstra enemy = enemyObject.GetComponent<EnemyDijkstra>();
         enemy.grafo = grafo;
-        enemy.currentNode = grafo.Nodes["0"]; // Starter Node
+        enemy.currentNode = grafo.Nodes[initialNode]; // Starter Node
+
+        StartCoroutine(SpawnEnemy(5f, initialNode));
+    }
+
+    private IEnumerator SpawnEnemy(float delay, string index)
+    {
+        extraGrafo = new Grafo();
+        extraGrafo.Initialize(nodeTransforms, connections);
+        
+        yield return new WaitForSeconds(delay);
+
+        GameObject enemyObject = Instantiate(enemyPrefab);
+        EnemyDijkstra enemy = enemyObject.GetComponent<EnemyDijkstra>();
+        enemy.grafo = extraGrafo;
+        enemy.currentNode = extraGrafo.Nodes[index]; // Starter Node
+
     }
 }
 

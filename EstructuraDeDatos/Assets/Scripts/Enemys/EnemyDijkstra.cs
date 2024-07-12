@@ -11,6 +11,10 @@ public class EnemyDijkstra : MonoBehaviour
     private Queue<Node> path;
     private Vector3 targetPosition;
     private HashSet<Node> visitedNodes;
+
+    private bool isAlive = true;
+    [SerializeField] private int health;
+    [SerializeField] private Animator animator;
     
     void Start()
     {
@@ -22,13 +26,16 @@ public class EnemyDijkstra : MonoBehaviour
 
     void Update()
     {
-        if (path.Count > 0)
+        if (isAlive)
         {
-            MoveAlongPath();
-        }
-        else
-        {
-            FindNextPath();
+            if (path.Count > 0)
+            {
+                MoveAlongPath();
+            }
+            else
+            {
+                FindNextPath();
+            }
         }
     }
 
@@ -61,7 +68,7 @@ public class EnemyDijkstra : MonoBehaviour
             {
                 shortestDistance = shortestPaths[edge.Target]; // Shortest distance => Target Node's distance
                 nextNode = edge.Target;
-                Debug.Log($"SIGUIENTE NODO {edge.Target.Name}");
+                //Debug.Log($"SIGUIENTE NODO {edge.Target.Name}");
             }
         }
 
@@ -75,7 +82,19 @@ public class EnemyDijkstra : MonoBehaviour
             path.Enqueue(currentNode);
             grafo.ReassignEdgeCost();
             FindNextPath();
-            Debug.LogError("REINICIO DE NODOS");
+            //Debug.LogError("REINICIO DE NODOS");
+        }
+    }
+    
+    public void EnemyDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            isAlive = false;
+            GetComponent<CapsuleCollider2D>().enabled = false;
+            //gameObject.SetActive(isAlive);
+            //GetComponent<Animator>().SetTrigger("isDead");
         }
     }
 }

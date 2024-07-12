@@ -26,12 +26,18 @@ namespace Weapons
             if (targetEnemy && collision.CompareTag("Enemy")) //Si la bala colisiona Enemy y es un objetivo del mismo
             {
                 EnemyScript enemy = collision.GetComponent<EnemyScript>();
+                EnemyDijkstra enemyDijkstra = collision.GetComponent<EnemyDijkstra>();
 
                 if (enemy != null)
                 {
                     enemy.EnemyDamage(20);
-                    Destroy(gameObject);
                 }
+                else if (enemyDijkstra != null)
+                {
+                    enemyDijkstra.EnemyDamage(20);
+                }
+                
+                Destroy(gameObject);
             }
 
             if (!targetEnemy && collision.CompareTag("Shield")) //Si la bala colisiona con un escudo y Enemy no es objetivo
