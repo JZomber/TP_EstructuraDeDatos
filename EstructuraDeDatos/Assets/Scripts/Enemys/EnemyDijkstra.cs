@@ -22,6 +22,9 @@ public class EnemyDijkstra : MonoBehaviour
         visitedNodes = new HashSet<Node>();
         transform.position = currentNode.Position;
         FindNextPath();
+        
+        animator.SetBool("isAlive", true);
+        animator.SetBool("isRunning", true);
     }
 
     void Update()
@@ -93,8 +96,9 @@ public class EnemyDijkstra : MonoBehaviour
         {
             isAlive = false;
             GetComponent<CapsuleCollider2D>().enabled = false;
-            //gameObject.SetActive(isAlive);
-            //GetComponent<Animator>().SetTrigger("isDead");
+            animator.SetBool("isAlive", isAlive);
+            animator.SetBool("isRunning", isAlive);
+            animator.SetTrigger("isDead");
         }
     }
 }
