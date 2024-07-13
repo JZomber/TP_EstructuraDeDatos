@@ -1,10 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GrafoManager : MonoBehaviour
 {
     public List<Transform> nodeTransforms;
+    [SerializeField] private BoxCollider2D roomTrigger;
     
     public GameObject enemyPrefab;
     private Grafo grafo;
@@ -29,6 +33,11 @@ public class GrafoManager : MonoBehaviour
     
     void Start()
     {
+        
+    }
+
+    private void SpawnStarterEnemy()
+    {
         grafo = new Grafo();
         grafo.Initialize(nodeTransforms, connections);
 
@@ -37,10 +46,10 @@ public class GrafoManager : MonoBehaviour
         enemy.grafo = grafo;
         enemy.currentNode = grafo.Nodes[initialNode]; // Starter Node
 
-        StartCoroutine(SpawnEnemy(5f, initialNode));
+        StartCoroutine(SpawnExtraEnemy(5f, initialNode));
     }
 
-    private IEnumerator SpawnEnemy(float delay, string index)
+    private IEnumerator SpawnExtraEnemy(float delay, string index)
     {
         extraGrafo = new Grafo();
         extraGrafo.Initialize(nodeTransforms, connections);
@@ -51,7 +60,15 @@ public class GrafoManager : MonoBehaviour
         EnemyDijkstra enemy = enemyObject.GetComponent<EnemyDijkstra>();
         enemy.grafo = extraGrafo;
         enemy.currentNode = extraGrafo.Nodes[index]; // Starter Node
+    }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            SpawnStarterEnemy();
+            roomTrigger.enabled = false;
+        }
     }
 }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class TeleportTrigger : MonoBehaviour
 {
-    private Transform teleportPosition;
+    [SerializeField] private Transform teleportPosition;
     
     public void Initialize(Transform position)
     {

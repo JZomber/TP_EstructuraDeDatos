@@ -42,7 +42,7 @@ public class EnemyMage : MonoBehaviour
         if (enemyManager != null)
         {
             enemyManager.OnMageCalled += HandlerGetNewTarget;
-            Debug.Log($"{gameObject.name} SE HA SUBSCRITO AL EVENTO OnMageCalled");
+            //Debug.Log($"{gameObject.name} SE HA SUBSCRITO AL EVENTO OnMageCalled");
         }
 
         if (capsuleCollider2D == null)
