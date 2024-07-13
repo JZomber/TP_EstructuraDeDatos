@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class CodexController : MonoBehaviour
 {
@@ -16,9 +15,18 @@ public class CodexController : MonoBehaviour
     public GameObject[] enemyPrefabs;
 
     private ABB enemyTree;
+    private SoundManager soundManager;
 
     void Start()
     {
+        // Obtener la instancia del SoundManager en la escena
+        soundManager = SoundManager.Instance;
+
+        if (soundManager == null)
+        {
+            Debug.LogError("SoundManager no está asignado en CodexController.");
+        }
+
         enemyTree = new ABB();
 
         // Agregar enemigos al árbol desde los prefabs
@@ -27,7 +35,7 @@ public class CodexController : MonoBehaviour
             EnemyScript enemyScript = enemyPrefab.GetComponent<EnemyScript>();
             if (enemyScript != null)
             {
-                enemyTree.AgregarElem(new EnemyCard(enemyScript.enemyName, (int)enemyScript.health, enemyScript.EnemySprite)); //FALTA DE REFERENCIAS
+                enemyTree.AgregarElem(new EnemyCard(enemyScript.enemyName, (int)enemyScript.health, enemyScript.EnemySprite));
             }
         }
 
@@ -37,7 +45,7 @@ public class CodexController : MonoBehaviour
         sortNameButton.onClick.AddListener(SortByName);
 
         // Mostrar la lista inicialmente ordenada por salud ascendente (menor a mayor vida)
-        MostrarEnemigosOrdenadosPorSaludAsc(); // Cambiado a MostrarEnemigosOrdenadosPorSaludAsc
+        MostrarEnemigosOrdenadosPorSaludAsc();
     }
 
     void MostrarEnemigosOrdenadosPorSaludAsc()
@@ -113,16 +121,34 @@ public class CodexController : MonoBehaviour
 
     void SortByHealthAsc()
     {
+        if (soundManager != null && soundManager.buttonClickSound != null)
+        {
+            SoundManager.Instance.soundEffectSource.volume = 0.2f;
+            soundManager.PlayButtonClickSound();
+            SoundManager.Instance.soundEffectSource.volume = 0.5f;
+        }
         MostrarEnemigosOrdenadosPorSaludAsc(); // Ordenar de menor a mayor vida
     }
 
     void SortByHealthDesc()
     {
+        if (soundManager != null && soundManager.buttonClickSound != null)
+        {
+            SoundManager.Instance.soundEffectSource.volume = 0.2f;
+            soundManager.PlayButtonClickSound();
+            SoundManager.Instance.soundEffectSource.volume = 0.5f;
+        }
         MostrarEnemigosOrdenadosPorSaludDesc(); // Ordenar de mayor a menor vida
     }
 
     void SortByName()
     {
+        if (soundManager != null && soundManager.buttonClickSound != null)
+        {
+            SoundManager.Instance.soundEffectSource.volume = 0.2f;
+            soundManager.PlayButtonClickSound();
+            SoundManager.Instance.soundEffectSource.volume = 0.5f;
+        }
         MostrarEnemigosOrdenadosPorNombre(); // Ordenar por nombre
     }
 }

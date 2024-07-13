@@ -6,6 +6,22 @@ public class MenuManager : MonoBehaviour
 {
     public Animator transition;
 
+    // Añadir referencia al SoundManager
+    public SoundManager soundManager;
+
+    void Start()
+    {
+        // Obtener la instancia del SoundManager si no está asignada en el editor
+        if (soundManager == null)
+        {
+            soundManager = FindObjectOfType<SoundManager>();
+            if (soundManager == null)
+            {
+                Debug.LogError("No se encontró el SoundManager en la escena.");
+            }
+        }
+    }
+
     public void LoadMenu()
     {
         StartCoroutine(MenuScreen("Menu"));
@@ -43,6 +59,11 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator MenuScreen(string sceneName) // Carga la pantalla "Menú"
     {
+        if (soundManager != null)
+        {
+            soundManager.PlayButtonClickSound();
+        }
+
         if (BackgroundMusicManager.Instance != null)
         {
             BackgroundMusicManager.Instance.PlayMenuMusic();
@@ -57,6 +78,12 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator StartGame(string sceneName)
     {
+
+        if (soundManager != null)
+        {
+            soundManager.PlayButtonClickSound();
+        }
+
         if (BackgroundMusicManager.Instance != null)
         {
             BackgroundMusicManager.Instance.StopMusic();
@@ -76,6 +103,11 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator LoadScene(string sceneName)
     {
+        if (soundManager != null)
+        {
+            soundManager.PlayButtonClickSound();
+        }
+
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(1f);
@@ -85,6 +117,11 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator LoadVictoryScene(string sceneName)
     {
+        if (soundManager != null)
+        {
+            soundManager.PlayButtonClickSound();
+        }
+
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(1f);
@@ -99,6 +136,11 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator LoadDefeatScene(string sceneName)
     {
+        if (soundManager != null)
+        {
+            soundManager.PlayButtonClickSound();
+        }
+
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(1f);
@@ -113,6 +155,11 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator RestartLevel(string sceneName)
     {
+        if (soundManager != null)
+        {
+            soundManager.PlayButtonClickSound();
+        }
+
         if (BackgroundMusicManager.Instance != null)
         {
             BackgroundMusicManager.Instance.StopMusic();
@@ -134,4 +181,13 @@ public class MenuManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void ShowControls()
+    {
+        if (soundManager != null)
+        {
+            soundManager.PlayButtonClickSound();
+        }
+    }
+
 }
