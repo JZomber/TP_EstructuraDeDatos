@@ -68,12 +68,14 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        SceneManager.LoadScene("Victory");
-
         if (BackgroundMusicManager.Instance != null)
         {
             BackgroundMusicManager.Instance.PlayVictorySound();
         }
+
+        yield return new WaitForSeconds(0.5f); // Espera medio segundo antes de cargar la escena
+
+        SceneManager.LoadScene("Victory");
     }
 
     public IEnumerator DefeatScreen(float delay) //Pantalla de derrota
@@ -87,11 +89,13 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        SceneManager.LoadScene("Defeat");
-
         if (BackgroundMusicManager.Instance != null)
         {
             BackgroundMusicManager.Instance.PlayDefeatSound();
         }
+
+        yield return new WaitForSeconds(0.5f); // Espera medio segundo antes de cargar la escena
+
+        SceneManager.LoadScene("Defeat");
     }
 }
