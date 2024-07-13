@@ -1,33 +1,38 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    
-    [Header("Enemy Attributes")] 
+    [Header("Enemy Attributes")]
     public float health;
-    private float currentHealth; 
+    private float currentHealth;
     public float speed;
     public bool isAlive = true;
     public bool isRangedEnemy;
     private Animator animator;
     private CapsuleCollider2D capsuleCollider2D;
-    
-    [Header("Player")] public GameObject player;
+
+    [Header("Enemy Information")]
+    public string enemyName; // Añadir nombre del enemigo
+    public Sprite EnemySprite; // Añadir sprite del enemigo
+
+    [Header("Player")]
+    public GameObject player;
     private float distance;
 
-    private EnemyMage enemyMage;
     private RangedEnemy rangedEnemy;
 
     public event Action<GameObject> OnEnemyKilled;
     public event Action OnEnemyRevived;
-    
+
     private void Start()
     {
         EnemySetup();
+        if (EnemySprite == null)
+        {
+            EnemySprite = gameObject.GetComponent<SpriteRenderer>().sprite; // Obtener sprite si no está asignado
+        }
     }
 
     void Update()
@@ -36,7 +41,7 @@ public class EnemyScript : MonoBehaviour
         {
             // Perseguir al Jugador
             distance = Vector2.Distance(transform.position, player.transform.position);
-        
+
             if (distance < 20)
             {
                 transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
@@ -48,12 +53,12 @@ public class EnemyScript : MonoBehaviour
     {
         isAlive = true;
         currentHealth = health;
-        
+
         if (capsuleCollider2D == null)
         {
             capsuleCollider2D = gameObject.GetComponent<CapsuleCollider2D>();
         }
-        
+
         capsuleCollider2D.enabled = true;
         capsuleCollider2D.isTrigger = false;
 
@@ -61,14 +66,14 @@ public class EnemyScript : MonoBehaviour
         {
             animator = gameObject.GetComponent<Animator>();
         }
-        
+
         if (isRangedEnemy)
         {
             if (rangedEnemy == null)
             {
                 rangedEnemy = gameObject.GetComponent<RangedEnemy>();
             }
-            
+
             rangedEnemy.isWeaponActive = true;
             rangedEnemy.canShoot = true;
             StartCoroutine(rangedEnemy.UpdateWeaponStatus(0f));
@@ -81,18 +86,15 @@ public class EnemyScript : MonoBehaviour
         if (isAlive)
         {
             currentHealth -= damage;
-            
+
             if (currentHealth <= 0)
             {
                 isAlive = false;
                 capsuleCollider2D.enabled = false;
                 animator.SetTrigger("isDead");
 
-                if (OnEnemyKilled != null)
-                {
-                    OnEnemyKilled(this.GameObject());
-                }
-            
+                OnEnemyKilled?.Invoke(this.gameObject);
+
                 if (isRangedEnemy && gameObject.activeInHierarchy)
                 {
                     rangedEnemy.canShoot = false;
@@ -111,10 +113,7 @@ public class EnemyScript : MonoBehaviour
             animator.SetTrigger("isDead");
             isAlive = false;
 
-            if (OnEnemyKilled != null)
-            {
-                OnEnemyKilled(this.GameObject());
-            }
+            OnEnemyKilled?.Invoke(this.gameObject);
 
             if (isRangedEnemy)
             {
@@ -132,14 +131,14 @@ public class EnemyScript : MonoBehaviour
             isAlive = true;
             currentHealth = health;
             animator.SetTrigger("isRevived");
-            
+
             if (isRangedEnemy)
             {
                 rangedEnemy.isWeaponActive = true;
                 StartCoroutine(rangedEnemy.UpdateWeaponStatus(1f));
                 StartCoroutine(RangedReset(1.5f));
             }
-            
+
             OnEnemyRevived?.Invoke();
         }
     }
@@ -147,7 +146,7 @@ public class EnemyScript : MonoBehaviour
     private IEnumerator RangedReset(float delay)
     {
         yield return new WaitForSeconds(delay);
-        
+
         capsuleCollider2D.enabled = true;
         rangedEnemy.canShoot = true;
     }

@@ -27,7 +27,7 @@ public class CodexController : MonoBehaviour
             EnemyScript enemyScript = enemyPrefab.GetComponent<EnemyScript>();
             if (enemyScript != null)
             {
-                //enemyTree.AgregarElem(new EnemyCard(enemyScript.enemyName, (int)enemyScript.health, enemyScript.EnemySprite)); //FALTA DE REFERENCIAS
+                enemyTree.AgregarElem(new EnemyCard(enemyScript.enemyName, (int)enemyScript.health, enemyScript.EnemySprite)); //FALTA DE REFERENCIAS
             }
         }
 
