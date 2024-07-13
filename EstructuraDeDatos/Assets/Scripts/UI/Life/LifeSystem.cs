@@ -110,8 +110,12 @@ public class LifeSystem : MonoBehaviour
                 hearts.Apilar(newHeart);
                 currentLife++;
                 obj.SetActive(false); // Desactivo el objeto
+
+                if (soundManager != null)
+                {
+                    soundManager.PlayPlayerHealSound();
+                }
             }
         }
     }
 }
-
