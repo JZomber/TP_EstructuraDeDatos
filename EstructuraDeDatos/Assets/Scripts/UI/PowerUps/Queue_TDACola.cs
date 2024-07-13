@@ -31,9 +31,9 @@ namespace UI.PowerUps
 
         public T DesAcolar() // Saco el primer elemento en entrar
         {
-            if (index == 0)
+            if (IsQueueEmpty())
             {
-                throw new Exception("La cola esta vacia");
+                return default;
             }
         
             T retorno = cola[index - 1];
@@ -44,9 +44,9 @@ namespace UI.PowerUps
 
         public T First() // Referencio al primer elemento en entrar
         {
-            if (index == 0)
+            if (IsQueueEmpty())
             {
-                throw new Exception("La cola esta vacia");
+                return default;
             }
         
             return cola[index - 1];

@@ -22,6 +22,16 @@ namespace UI.PowerUps
             powerUpsQueue.InitQueue(maxSize); //Inicializa la lista
         }
 
+        public GameObject CheckCurrentPowerUp()
+        {
+            if (powerUpsQueue.IsQueueEmpty())
+            {
+                return null;
+            }
+
+            return currentPowerUp;
+        }
+
         public void AddPowerUp(GameObject obj)
         {
             powerUpsQueue.Acolar(obj); //Agrego la referencia del objeto a la lista
@@ -44,6 +54,11 @@ namespace UI.PowerUps
 
         private void UpdatePowerUpDisplay()
         {
+            if (powerUpsQueue.IsQueueEmpty())
+            {
+                return;
+            }
+            
             GameObject firstPowerUp = powerUpsQueue.First(); //Obtengo la referencia al primer objeto en entrar
             currentPowerUp = firstPowerUp;
                 

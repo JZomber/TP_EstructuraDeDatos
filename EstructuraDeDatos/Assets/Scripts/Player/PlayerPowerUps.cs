@@ -35,26 +35,29 @@ public class PlayerPowerUps : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) //Input - SPACE
         {
-            powerUp = tdaQueue.currentPowerUp; //Referencio al primer objeto de la TDA Cola
+            powerUp = tdaQueue.CheckCurrentPowerUp(); //Referencio al primer objeto de la TDA Cola
 
-            if (powerUp.name == "Shield") // Si el objeto es el escudo
+            if (powerUp)
             {
-                playerCollider.enabled = false;
-                shieldPrefab.SetActive(true);
-                isShieldActive = true;
-            }
+                if (powerUp.name == "Shield") // Si el objeto es el escudo
+                {
+                    playerCollider.enabled = false;
+                    shieldPrefab.SetActive(true);
+                    isShieldActive = true;
+                }
 
-            if (powerUp.name == "HealthUp") // Si el objeto es para recuperar vida
-            {
-                lifeSystem.HealPlayer(2, powerUp.gameObject);
-            }
+                if (powerUp.name == "HealthUp") // Si el objeto es para recuperar vida
+                {
+                    lifeSystem.HealPlayer(2, powerUp.gameObject);
+                }
             
-            if (powerUp.name == "FastShoot") // Si el objeto es para mayor disparo
-            {
-                playerShoot.isPowerActive = true;
-            }
+                if (powerUp.name == "FastShoot") // Si el objeto es para mayor disparo
+                {
+                    playerShoot.isPowerActive = true;
+                }
             
-            tdaQueue.RemovePowerUp(); //Quito el objeto del TDA Cola
+                tdaQueue.RemovePowerUp(); //Quito el objeto del TDA Cola
+            }
         }
 
         if (shieldPowerUp.damageResist <= 0) //Si la resistencia del escudo termina
