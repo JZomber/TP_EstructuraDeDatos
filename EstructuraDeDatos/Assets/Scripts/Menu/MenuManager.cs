@@ -14,7 +14,8 @@ public class MenuManager : MonoBehaviour
 
     public void LoadNextLevel() // Carga el primer nivel
     {
-        StartCoroutine(LoadLevel(1));
+        //StartCoroutine(LoadLevel(1));
+        StartCoroutine(LoadScene("Level_1"));
     }
 
     public void LoadCodex() // Carga la escena del Codex

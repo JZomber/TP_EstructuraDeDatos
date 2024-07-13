@@ -3,50 +3,102 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
-    public string enemyName; // AÒadido: Nombre del enemigo
-    public Sprite EnemySprite;
-    [Header("Enemy Attributes")] public float health;
+    
+    [Header("Enemy Attributes")] 
+    public float health;
+    private float currentHealth; 
     public float speed;
-
+    public bool isAlive = true;
+    public bool isRangedEnemy;
+    private Animator animator;
+    private CapsuleCollider2D capsuleCollider2D;
+    
     [Header("Player")] public GameObject player;
     private float distance;
 
-    private LevelManager LevelManager;
+    private EnemyMage enemyMage;
+    private RangedEnemy rangedEnemy;
 
+    public event Action<GameObject> OnEnemyKilled;
+    public event Action OnEnemyRevived;
+    
     private void Start()
     {
-        LevelManager = FindObjectOfType<LevelManager>();
-        EnemySprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+        EnemySetup();
     }
 
     void Update()
     {
-        // Perseguir al Jugador
-        distance = Vector2.Distance(transform.position, player.transform.position);
-        
-        if (distance < 20)
+        if (player)
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+            // Perseguir al Jugador
+            distance = Vector2.Distance(transform.position, player.transform.position);
+        
+            if (distance < 20)
+            {
+                transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+            }
         }
     }
 
-    // DaÒo del Enemigo
+    private void EnemySetup()
+    {
+        isAlive = true;
+        currentHealth = health;
+        
+        if (capsuleCollider2D == null)
+        {
+            capsuleCollider2D = gameObject.GetComponent<CapsuleCollider2D>();
+        }
+        
+        capsuleCollider2D.enabled = true;
+        capsuleCollider2D.isTrigger = false;
+
+        if (animator == null)
+        {
+            animator = gameObject.GetComponent<Animator>();
+        }
+        
+        if (isRangedEnemy)
+        {
+            if (rangedEnemy == null)
+            {
+                rangedEnemy = gameObject.GetComponent<RangedEnemy>();
+            }
+            
+            rangedEnemy.isWeaponActive = true;
+            rangedEnemy.canShoot = true;
+            StartCoroutine(rangedEnemy.UpdateWeaponStatus(0f));
+        }
+    }
+
+    // Da√±o del Enemigo
     public void EnemyDamage(float damage)
     {
-        health -= damage;
-        if (health <= 0)
+        if (isAlive)
         {
-            LevelManager.enemyCounter++;
-            this.GetComponent<CapsuleCollider2D>().enabled = false;
-            this.GetComponent<Animator>().SetTrigger("isDead");
-
-            if (this.GetComponentInChildren<RangedEnemy>())
+            currentHealth -= damage;
+            
+            if (currentHealth <= 0)
             {
-                this.GetComponentInChildren<RangedEnemy>().canShoot = false;
+                isAlive = false;
+                capsuleCollider2D.enabled = false;
+                animator.SetTrigger("isDead");
+
+                if (OnEnemyKilled != null)
+                {
+                    OnEnemyKilled(this.GameObject());
+                }
+            
+                if (isRangedEnemy && gameObject.activeInHierarchy)
+                {
+                    rangedEnemy.canShoot = false;
+                    rangedEnemy.isWeaponActive = false;
+                    StartCoroutine(rangedEnemy.UpdateWeaponStatus(0f));
+                }
             }
         }
     }
@@ -55,14 +107,53 @@ public class EnemyScript : MonoBehaviour
     {
         if (other.CompareTag("Shield"))
         {
-            LevelManager.enemyCounter++;
-            this.GetComponent<CapsuleCollider2D>().enabled = false;
-            this.GetComponent<Animator>().SetTrigger("isDead");
+            capsuleCollider2D.enabled = false;
+            animator.SetTrigger("isDead");
+            isAlive = false;
 
-            if (this.GetComponentInChildren<RangedEnemy>())
+            if (OnEnemyKilled != null)
             {
-                this.GetComponentInChildren<RangedEnemy>().canShoot = false;
+                OnEnemyKilled(this.GameObject());
+            }
+
+            if (isRangedEnemy)
+            {
+                rangedEnemy.canShoot = false;
+                rangedEnemy.isWeaponActive = false;
+                StartCoroutine(rangedEnemy.UpdateWeaponStatus(0f));
             }
         }
+    }
+
+    public void EnemyRevive()
+    {
+        if (!isAlive)
+        {
+            isAlive = true;
+            currentHealth = health;
+            animator.SetTrigger("isRevived");
+            
+            if (isRangedEnemy)
+            {
+                rangedEnemy.isWeaponActive = true;
+                StartCoroutine(rangedEnemy.UpdateWeaponStatus(1f));
+                StartCoroutine(RangedReset(1.5f));
+            }
+            
+            OnEnemyRevived?.Invoke();
+        }
+    }
+
+    private IEnumerator RangedReset(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        
+        capsuleCollider2D.enabled = true;
+        rangedEnemy.canShoot = true;
+    }
+
+    private void OnEnable()
+    {
+        EnemySetup();
     }
 }
