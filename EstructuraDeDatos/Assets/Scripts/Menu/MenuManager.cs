@@ -13,8 +13,7 @@ public class MenuManager : MonoBehaviour
 
     public void LoadNextLevel() // Carga el primer nivel
     {
-        //StartCoroutine(LoadLevel(1));
-        StartCoroutine(LoadScene("Level_1"));
+        StartCoroutine(StartGame("Level_1"));
     }
 
     public void LoadCodex() // Carga la escena del Codex
@@ -39,10 +38,10 @@ public class MenuManager : MonoBehaviour
 
     public void RestartGame() // Reinicia el nivel
     {
-        StartCoroutine(RestartLevel(1)); // Aquí se asume que el nivel a reiniciar es el nivel 1
+        StartCoroutine(RestartLevel("Level_1"));
     }
 
-    IEnumerator MenuScreen(string str) // Carga la pantalla "Menú"
+    IEnumerator MenuScreen(string sceneName) // Carga la pantalla "Menú"
     {
         if (BackgroundMusicManager.Instance != null)
         {
@@ -53,21 +52,26 @@ public class MenuManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        SceneManager.LoadScene(str);
+        SceneManager.LoadScene(sceneName);
     }
 
-    IEnumerator LoadLevel(int levelIndex)
+    IEnumerator StartGame(string sceneName)
     {
         if (BackgroundMusicManager.Instance != null)
         {
-            BackgroundMusicManager.Instance.PlayGameplayMusic();
+            BackgroundMusicManager.Instance.StopMusic();
         }
 
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(1f);
 
-        SceneManager.LoadScene(levelIndex);
+        if (BackgroundMusicManager.Instance != null)
+        {
+            BackgroundMusicManager.Instance.PlayGameplayMusic();
+        }
+
+        SceneManager.LoadScene(sceneName);
     }
 
     IEnumerator LoadScene(string sceneName)
@@ -81,44 +85,49 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator LoadVictoryScene(string sceneName)
     {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1f);
+
+        SceneManager.LoadScene(sceneName);
+
         if (BackgroundMusicManager.Instance != null)
         {
             BackgroundMusicManager.Instance.PlayVictorySound();
         }
+    }
 
+    IEnumerator LoadDefeatScene(string sceneName)
+    {
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(1f);
 
         SceneManager.LoadScene(sceneName);
-    }
 
-    IEnumerator LoadDefeatScene(string sceneName)
-    {
         if (BackgroundMusicManager.Instance != null)
         {
             BackgroundMusicManager.Instance.PlayDefeatSound();
+        }
+    }
+
+    IEnumerator RestartLevel(string sceneName)
+    {
+        if (BackgroundMusicManager.Instance != null)
+        {
+            BackgroundMusicManager.Instance.StopMusic();
         }
 
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(1f);
 
-        SceneManager.LoadScene(sceneName);
-    }
-
-    IEnumerator RestartLevel(int levelIndex)
-    {
         if (BackgroundMusicManager.Instance != null)
         {
             BackgroundMusicManager.Instance.PlayGameplayMusic();
         }
 
-        transition.SetTrigger("Start");
-
-        yield return new WaitForSeconds(1f);
-
-        SceneManager.LoadScene(levelIndex);
+        SceneManager.LoadScene(sceneName);
     }
 
     public void GameQuit() // Quita el juego

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -35,32 +36,46 @@ public class BackgroundMusicManager : MonoBehaviour
         if (audioSource.clip != menuMusic)
         {
             audioSource.clip = menuMusic;
+            audioSource.loop = true;
             audioSource.Play();
         }
     }
 
     public void PlayGameplayMusic()
     {
-        if (audioSource.clip != gameplayMusic)
-        {
-            audioSource.clip = gameplayMusic;
-            audioSource.Play();
-        }
+        StartCoroutine(PlayMusicWithDelay(gameplayMusic, 1f));
     }
 
     public void PlayVictorySound()
     {
-        audioSource.Stop();
-        audioSource.loop = false;
-        audioSource.clip = victorySound;
-        audioSource.Play();
+        StartCoroutine(PlaySoundAfterDelay(victorySound, 1f));
     }
 
     public void PlayDefeatSound()
     {
+        StartCoroutine(PlaySoundAfterDelay(defeatSound, 1f));
+    }
+
+    public void StopMusic()
+    {
         audioSource.Stop();
+    }
+
+    private IEnumerator PlayMusicWithDelay(AudioClip clip, float delay)
+    {
+        audioSource.Stop();
+        yield return new WaitForSeconds(delay);
+        audioSource.clip = clip;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
+    private IEnumerator PlaySoundAfterDelay(AudioClip clip, float delay)
+    {
+        audioSource.Stop();
+        yield return new WaitForSeconds(delay);
+        audioSource.clip = clip;
         audioSource.loop = false;
-        audioSource.clip = defeatSound;
         audioSource.Play();
     }
 }
