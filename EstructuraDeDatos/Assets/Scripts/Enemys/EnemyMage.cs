@@ -1,13 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using Update = UnityEngine.PlayerLoop.Update;
 
 public class EnemyMage : MonoBehaviour
 {
-    [Header("Enemy Attributes")] 
+    [Header("Enemy Attributes")]
     public int health;
     private int currentHealth;
     public bool isAlive;
@@ -31,14 +29,14 @@ public class EnemyMage : MonoBehaviour
     private void EnemySetup()
     {
         currentTarget = null;
-        
+
         isAlive = true;
         currentHealth = health;
         enemyShield.SetActive(true);
         spawnPoint = transform.position;
-        
+
         enemyManager = FindObjectOfType<EnemyManager>();
-        
+
         if (enemyManager != null)
         {
             enemyManager.OnMageCalled += HandlerGetNewTarget;
@@ -54,8 +52,6 @@ public class EnemyMage : MonoBehaviour
 
     private void HandlerGetNewTarget(GameObject target)
     {
-        //Debug.Log($"MOVIENDO HACIA {target}");
-
         if (currentTarget == null)
         {
             currentTarget = target;
@@ -65,18 +61,17 @@ public class EnemyMage : MonoBehaviour
         {
             nextTarget.Add(target);
         }
-        
     }
 
     private IEnumerator MoveToTarget(GameObject target, float delay)
     {
         yield return new WaitForSeconds(delay);
-        
+
         if (isAlive)
         {
             isReviving = true;
             UpdateColliders();
-        
+
             gameObject.transform.position = target.transform.position + new Vector3(0, 1, 0);
             StartCoroutine(ReviveTarget(1f, target));
         }
@@ -112,7 +107,7 @@ public class EnemyMage : MonoBehaviour
         }
     }
 
-    private void UpdateColliders() //Controla cuando el mago/necro es vulnerable o no
+    private void UpdateColliders() // Controla cuando el mago/necro es vulnerable o no
     {
         if (isReviving && isAlive)
         {
@@ -129,30 +124,33 @@ public class EnemyMage : MonoBehaviour
     private IEnumerator Relocate(float delay)
     {
         yield return new WaitForSeconds(delay);
-        
+
         if (isAlive)
         {
             isReviving = false;
             UpdateColliders();
-        
+
             gameObject.transform.position = spawnPoint;
         }
     }
-    
+
     public void EnemyDamage(int damage)
     {
         if (isAlive)
         {
             currentHealth -= damage;
         }
-        
+
         if (currentHealth <= 0 && isAlive)
         {
             isAlive = false;
             capsuleCollider2D.enabled = isAlive;
             enemyShield.SetActive(isAlive);
             animator.SetTrigger("isDead");
-            
+
+            // Reproduce el sonido de muerte del enemigo esqueleto
+            SoundManager.Instance.PlayEnemySkeletonDeathSound();
+
             OnMageKilled?.Invoke(gameObject);
             enemyManager.OnMageCalled -= HandlerGetNewTarget;
         }
@@ -165,7 +163,10 @@ public class EnemyMage : MonoBehaviour
 
     private void OnDisable()
     {
-        enemyManager.OnMageCalled -= HandlerGetNewTarget;
+        if (enemyManager != null)
+        {
+            enemyManager.OnMageCalled -= HandlerGetNewTarget;
+        }
         nextTarget.Clear();
     }
 }

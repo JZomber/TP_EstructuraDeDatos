@@ -22,6 +22,7 @@ public class EnemyScript : MonoBehaviour
     private float distance;
 
     private RangedEnemy rangedEnemy;
+    private SoundManager soundManager; // Referencia al SoundManager
 
     public event Action<GameObject> OnEnemyKilled;
     public event Action OnEnemyRevived;
@@ -33,6 +34,8 @@ public class EnemyScript : MonoBehaviour
         {
             EnemySprite = gameObject.GetComponent<SpriteRenderer>().sprite; // Obtener sprite si no está asignado
         }
+
+        soundManager = SoundManager.Instance; // Obtener instancia del SoundManager
     }
 
     void Update()
@@ -95,6 +98,12 @@ public class EnemyScript : MonoBehaviour
 
                 OnEnemyKilled?.Invoke(this.gameObject);
 
+                // Reproducir el sonido de muerte del enemigo
+                if (soundManager != null)
+                {
+                    soundManager.PlayEnemySkeletonDeathSound();
+                }
+
                 if (isRangedEnemy && gameObject.activeInHierarchy)
                 {
                     rangedEnemy.canShoot = false;
@@ -115,6 +124,12 @@ public class EnemyScript : MonoBehaviour
 
             OnEnemyKilled?.Invoke(this.gameObject);
 
+            // Reproducir el sonido de muerte del enemigo
+            if (soundManager != null)
+            {
+                soundManager.PlayEnemySkeletonDeathSound();
+            }
+
             if (isRangedEnemy)
             {
                 rangedEnemy.canShoot = false;
@@ -131,6 +146,7 @@ public class EnemyScript : MonoBehaviour
             isAlive = true;
             currentHealth = health;
             animator.SetTrigger("isRevived");
+            SoundManager.Instance.PlayEnemyReviveSound();
 
             if (isRangedEnemy)
             {
