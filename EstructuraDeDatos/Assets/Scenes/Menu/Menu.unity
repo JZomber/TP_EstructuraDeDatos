@@ -5572,9 +5572,9 @@ MonoBehaviour:
   cardPickUpSound: {fileID: 8300000, guid: 37c0372481031d1418aa4cb6641b9838, type: 3}
   cardUsePowerSound: {fileID: 8300000, guid: 9626a0a5237a5384eb7956443bf5b940, type: 3}
   enemyShootSound: {fileID: 8300000, guid: 954309602fa69b9428bdc71cbee0979f, type: 3}
-  enemySkeletonDeathSound: {fileID: 0}
-  enemyGoblinDeathSound: {fileID: 0}
-  enemyReviveSound: {fileID: 0}
+  enemySkeletonDeathSound: {fileID: 8300000, guid: c68765dfc7a2d9f46a91f01611a37e8a, type: 3}
+  enemyGoblinDeathSound: {fileID: 8300000, guid: 34c9f99faab368d4cb615c1598f97d20, type: 3}
+  enemyReviveSound: {fileID: 8300000, guid: 6481b2e1baa076b42873ba0e4d91c74c, type: 3}
 --- !u!4 &928067462
 Transform:
   m_ObjectHideFlags: 0
