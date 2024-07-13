@@ -15,6 +15,18 @@ public class PlayerShoot : MonoBehaviour
     private float timePowerUp = 6f; //Duración del power up
 
     public bool canShoot = true;
+    private SoundManager soundManager;
+
+
+    void Start()
+    {
+        // Obtener la instancia del SoundManager
+        soundManager = SoundManager.Instance;
+        if (soundManager == null)
+        {
+            Debug.LogError("SoundManager no encontrado en la escena.");
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -48,11 +60,21 @@ public class PlayerShoot : MonoBehaviour
         var rotation = orig.rotation;
         rotation *=  Quaternion.Euler(0, 0, -90);
         Instantiate(prefab, orig.position, rotation);
-            
+
+        if (soundManager != null)
+        {
+            soundManager.PlayPlayerShootSound();
+        }
+
         if (isPowerActive) //Si el poder está activo, instancia otra bala
         {
             yield return new WaitForSeconds(delay);
             Instantiate(prefab, orig.position, rotation);
+
+            if (soundManager != null)
+            {
+                soundManager.PlayPlayerShootSound();
+            }
         }
     }
 }
