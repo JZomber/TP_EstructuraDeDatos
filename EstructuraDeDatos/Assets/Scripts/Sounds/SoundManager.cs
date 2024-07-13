@@ -16,6 +16,9 @@ public class SoundManager : MonoBehaviour
     public AudioClip cardPickUpSound;
     public AudioClip cardUsePowerSound;
     public AudioClip enemyShootSound;
+    public AudioClip enemySkeletonDeathSound;
+    public AudioClip enemyGoblinDeathSound;
+    public AudioClip enemyReviveSound; // Nuevo campo para el sonido de cuando los enemigos reviven
 
     void Awake()
     {
@@ -74,5 +77,20 @@ public class SoundManager : MonoBehaviour
     public void PlayEnemyShootSound()
     {
         soundEffectSource.PlayOneShot(enemyShootSound);
+    }
+
+    public void PlayEnemySkeletonDeathSound()
+    {
+        soundEffectSource.PlayOneShot(enemySkeletonDeathSound);
+    }
+
+    public void PlayEnemyGoblinDeathSound()
+    {
+        soundEffectSource.PlayOneShot(enemyGoblinDeathSound);
+    }
+
+    public void PlayEnemyReviveSound()
+    {
+        soundEffectSource.PlayOneShot(enemyReviveSound);
     }
 }
