@@ -26,11 +26,16 @@ namespace Weapons
             if (targetEnemy && collision.CompareTag("Enemy")) //Si la bala colisiona Enemy y es un objetivo del mismo
             {
                 EnemyScript enemy = collision.GetComponent<EnemyScript>();
+                EnemyMage enemyMage = collision.GetComponent<EnemyMage>();
                 EnemyDijkstra enemyDijkstra = collision.GetComponent<EnemyDijkstra>();
 
                 if (enemy != null)
                 {
                     enemy.EnemyDamage(20);
+                }
+                else if (enemyMage != null)
+                {
+                    enemyMage.EnemyDamage(20);
                 }
                 else if (enemyDijkstra != null)
                 {
@@ -44,6 +49,11 @@ namespace Weapons
             {
                 var shield = collision.gameObject.GetComponent<ShieldPowerUp>();
                 shield.damageResist -= 1;
+                Destroy(gameObject);
+            }
+            
+            if (targetEnemy && collision.CompareTag("EnemyShield"))
+            {
                 Destroy(gameObject);
             }
 

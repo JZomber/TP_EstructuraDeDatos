@@ -17,14 +17,12 @@ public class LevelManager : MonoBehaviour
     private int totalWaypoints;
     private int indexWaypoint;
 
-    public Animator transition; //Transición entre escenas
+    public Animator transition; //Transiciï¿½n entre escenas
+
+    [SerializeField] private int killsRequired = 4;
 
     public int enemyCounter; //Enemigos elminados
-
-    public QuickSortData quickSortData;
-
-    private float startTime;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -39,8 +37,6 @@ public class LevelManager : MonoBehaviour
             {
                 waypoints[i] = holderWaypoints.transform.GetChild(i).transform;
             }
-
-            startTime = Time.time; // Inicializar el tiempo de inicio del nivel
         }
     }
     
@@ -48,7 +44,7 @@ public class LevelManager : MonoBehaviour
     {
         if (isGameLoop) //Si es un nivel de juego
         {
-            if (enemyCounter >= 4)
+            if (enemyCounter >= killsRequired)
             {
                 doors.SetActive(false);
             }
@@ -57,7 +53,8 @@ public class LevelManager : MonoBehaviour
 
     public void TpWaypoint() //Posiciones a donde llevar al player cada vez que termina una sala
     {
-        player.transform.position = waypoints[indexWaypoint].transform.position;
+        player.transform.position = new Vector3(waypoints[indexWaypoint].transform.position.x, waypoints[indexWaypoint].transform.position.y,0);
+
         indexWaypoint++;
         enemyCounter = 0;
         doors.SetActive(true);
@@ -65,15 +62,6 @@ public class LevelManager : MonoBehaviour
     
     public IEnumerator VictoryScreen(float delay) //Pantalla de victoria
     {
-
-        float playerTime = Time.time - startTime; // Calcular el tiempo del jugador
-        quickSortData.mainPlayerTime = playerTime; // Actualizar el tiempo del jugador en QuickSortData
-
-        if (playerTime < quickSortData.MainPlayerRecordTime)
-        {
-            quickSortData.SetNewRecord(playerTime); // Actualizar el récord si es un nuevo mejor tiempo
-        }
-
         transition.SetTrigger("Start");
         
         yield return new WaitForSeconds(delay);
