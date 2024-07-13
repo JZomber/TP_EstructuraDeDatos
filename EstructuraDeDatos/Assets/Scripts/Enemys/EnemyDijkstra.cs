@@ -15,7 +15,9 @@ public class EnemyDijkstra : MonoBehaviour
     private bool isAlive = true;
     [SerializeField] private int health;
     [SerializeField] private Animator animator;
-    
+
+    private SoundManager soundManager;
+
     void Start()
     {
         path = new Queue<Node>();
@@ -99,6 +101,11 @@ public class EnemyDijkstra : MonoBehaviour
             animator.SetBool("isAlive", isAlive);
             animator.SetBool("isRunning", isAlive);
             animator.SetTrigger("isDead");
+
+            if (soundManager != null)
+            {
+                soundManager.PlayEnemyGoblinDeathSound();
+            }
         }
     }
 }
