@@ -27,6 +27,9 @@ public class EnemyDijkstra : MonoBehaviour
         
         animator.SetBool("isAlive", true);
         animator.SetBool("isRunning", true);
+
+        soundManager = SoundManager.Instance;
+
     }
 
     void Update()
