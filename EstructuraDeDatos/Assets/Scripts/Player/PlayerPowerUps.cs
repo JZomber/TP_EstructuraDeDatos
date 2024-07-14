@@ -21,6 +21,8 @@ public class PlayerPowerUps : MonoBehaviour
 
     private CapsuleCollider2D playerCollider; //Collider del player (Cápsula)
 
+    private SoundManager soundManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,7 @@ public class PlayerPowerUps : MonoBehaviour
         tdaQueue = FindObjectOfType<TDA_Queue>(); // Busca el script TDA Queue
         lifeSystem = FindObjectOfType<LifeSystem>(); // Busca el script del TDA Pila
         playerShoot = FindObjectOfType<PlayerShoot>(); // Busca el script que le permite al player disparar
+        soundManager = SoundManager.Instance;
     }
 
     void Update()
@@ -44,6 +47,12 @@ public class PlayerPowerUps : MonoBehaviour
                     playerCollider.enabled = false;
                     shieldPrefab.SetActive(true);
                     isShieldActive = true;
+
+                    if (soundManager != null)
+                    {
+                        soundManager.PlayPlayerActivateShieldSound();
+                    }
+
                 }
 
                 if (powerUp.name == "HealthUp") // Si el objeto es para recuperar vida
@@ -54,6 +63,12 @@ public class PlayerPowerUps : MonoBehaviour
                 if (powerUp.name == "FastShoot") // Si el objeto es para mayor disparo
                 {
                     playerShoot.isPowerActive = true;
+
+                    if (soundManager != null)
+                    {
+                        soundManager.PlayPlayerActivatePowerUpSound();
+                    }
+
                 }
             
                 tdaQueue.RemovePowerUp(); //Quito el objeto del TDA Cola
@@ -74,6 +89,11 @@ public class PlayerPowerUps : MonoBehaviour
         if (other.CompareTag("PowerUp")) // Si el jugador colisiona con un enemigo y puede tomar daño
         {
             tdaQueue.AddPowerUp(other.GameObject());
+
+            if (soundManager != null)
+            {
+                soundManager.PlayCardPickUpSound();
+            }
         }
     }
 }
