@@ -214,6 +214,7 @@ MonoBehaviour:
   speed: 0
   isAlive: 1
   isRangedEnemy: 1
+  enemySpawner: {fileID: 5224440271227611922, guid: ea77fe75fbf31b241bbc741084dc52f6, type: 3}
   enemyName: Skeleton Base
   EnemySprite: {fileID: 4806371549170660726, guid: 406ecb0b9ba7ba44598f71df4973e55c, type: 3}
   player: {fileID: 2705700512366788034, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}

@@ -61,8 +61,7 @@ public class EnemyScript : MonoBehaviour
         {
             capsuleCollider2D = gameObject.GetComponent<CapsuleCollider2D>();
         }
-
-        capsuleCollider2D.enabled = true;
+        capsuleCollider2D.enabled = false;
         capsuleCollider2D.isTrigger = false;
 
         if (animator == null)
@@ -78,8 +77,8 @@ public class EnemyScript : MonoBehaviour
             }
 
             rangedEnemy.isWeaponActive = true;
-            rangedEnemy.canShoot = true;
             StartCoroutine(rangedEnemy.UpdateWeaponStatus(0f));
+            StartCoroutine(RangedReset(1f));
         }
     }
 
@@ -122,7 +121,7 @@ public class EnemyScript : MonoBehaviour
             animator.SetTrigger("isDead");
             isAlive = false;
 
-            OnEnemyKilled?.Invoke(this.gameObject);
+            OnEnemyKilled?.Invoke(gameObject);
 
             // Reproducir el sonido de muerte del enemigo
             if (soundManager != null)
