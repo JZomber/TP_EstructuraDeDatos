@@ -243,7 +243,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5492140727637136066, guid: db60e5ef563aef34793897ec91cf3b19, type: 3}
       propertyPath: m_Name
-      value: FastShoot (1)
+      value: FastShoot
       objectReference: {fileID: 0}
     - target: {fileID: 6159645645880683076, guid: db60e5ef563aef34793897ec91cf3b19, type: 3}
       propertyPath: m_RootOrder
@@ -396,7 +396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6467638416760254932, guid: 305029bb3e9ebbb4d9240883ec1f6c8c, type: 3}
       propertyPath: m_Name
-      value: HealthUp (1)
+      value: HealthUp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3868,7 +3868,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 488213115397630172, guid: 72cc6e64d51b85e4b92f2d199fce2fd1, type: 3}
       propertyPath: m_Name
-      value: Shield (1)
+      value: Shield
       objectReference: {fileID: 0}
     - target: {fileID: 8580095905019467314, guid: 72cc6e64d51b85e4b92f2d199fce2fd1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9657,7 +9657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1947825897506007929, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2548275921892515708, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
       propertyPath: m_Name
