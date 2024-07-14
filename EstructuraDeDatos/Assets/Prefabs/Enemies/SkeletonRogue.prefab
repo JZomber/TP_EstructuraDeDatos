@@ -208,7 +208,6 @@ MonoBehaviour:
   speed: 0
   isAlive: 1
   isRangedEnemy: 1
-  enemySpawner: {fileID: 5224440271227611922, guid: ea77fe75fbf31b241bbc741084dc52f6, type: 3}
   enemyName: Skeleton Rogue
   EnemySprite: {fileID: -223903707057789918, guid: 02ff5d5270bdd1d46a7aa763d3b50ebf, type: 3}
   player: {fileID: 2705700512366788034, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}

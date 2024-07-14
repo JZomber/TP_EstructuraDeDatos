@@ -23,6 +23,7 @@ public class EnemyScript : MonoBehaviour
 
     private RangedEnemy rangedEnemy;
     private SoundManager soundManager; // Referencia al SoundManager
+    private EnemyManager enemyManager;
 
     public event Action<GameObject> OnEnemyKilled;
     public event Action OnEnemyRevived;
@@ -56,6 +57,17 @@ public class EnemyScript : MonoBehaviour
     {
         isAlive = true;
         currentHealth = health;
+        
+        if (enemyManager == null)
+        {
+            enemyManager = FindObjectOfType<EnemyManager>();
+            enemyManager.OnEnemyDespawn += HandlerEnemyDespawn;
+        }
+        else
+        {
+            enemyManager.OnEnemyDespawn += HandlerEnemyDespawn;
+        }
+        
 
         if (capsuleCollider2D == null)
         {
@@ -156,6 +168,12 @@ public class EnemyScript : MonoBehaviour
 
             OnEnemyRevived?.Invoke();
         }
+    }
+
+    private void HandlerEnemyDespawn()
+    {
+        animator.SetTrigger("despawn");
+        enemyManager.OnEnemyDespawn -= HandlerEnemyDespawn;
     }
 
     private IEnumerator RangedReset(float delay)

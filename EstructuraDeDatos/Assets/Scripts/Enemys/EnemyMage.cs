@@ -29,18 +29,21 @@ public class EnemyMage : MonoBehaviour
     private void EnemySetup()
     {
         currentTarget = null;
-
+        isReviving = false;
         isAlive = true;
         currentHealth = health;
-        enemyShield.SetActive(true);
         spawnPoint = transform.position;
-
-        enemyManager = FindObjectOfType<EnemyManager>();
-
-        if (enemyManager != null)
+        
+        if (enemyManager == null)
+        {
+            enemyManager = FindObjectOfType<EnemyManager>();
+            enemyManager.OnMageCalled += HandlerGetNewTarget;
+            enemyManager.OnEnemyDespawn += HandlerEnemyDespawn;
+        }
+        else
         {
             enemyManager.OnMageCalled += HandlerGetNewTarget;
-            //Debug.Log($"{gameObject.name} SE HA SUBSCRITO AL EVENTO OnMageCalled");
+            enemyManager.OnEnemyDespawn += HandlerEnemyDespawn;
         }
 
         if (capsuleCollider2D == null)
@@ -48,6 +51,8 @@ public class EnemyMage : MonoBehaviour
             capsuleCollider2D = GetComponent<CapsuleCollider2D>();
             capsuleCollider2D.enabled = false;
         }
+        
+        UpdateColliders();
     }
 
     private void HandlerGetNewTarget(GameObject target)
@@ -109,15 +114,15 @@ public class EnemyMage : MonoBehaviour
 
     private void UpdateColliders() // Controla cuando el mago/necro es vulnerable o no
     {
-        if (isReviving && isAlive)
-        {
-            enemyShield.SetActive(false);
-            capsuleCollider2D.enabled = true;
-        }
-        else
+        if (!isReviving && isAlive)
         {
             enemyShield.SetActive(true);
             capsuleCollider2D.enabled = false;
+        }
+        else
+        {
+            enemyShield.SetActive(false);
+            capsuleCollider2D.enabled = true;
         }
     }
 
@@ -154,6 +159,12 @@ public class EnemyMage : MonoBehaviour
             OnMageKilled?.Invoke(gameObject);
             enemyManager.OnMageCalled -= HandlerGetNewTarget;
         }
+    }
+    
+    private void HandlerEnemyDespawn()
+    {
+        animator.SetTrigger("despawn");
+        enemyManager.OnEnemyDespawn -= HandlerEnemyDespawn;
     }
 
     private void OnEnable()

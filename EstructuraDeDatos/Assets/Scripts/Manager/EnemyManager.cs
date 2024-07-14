@@ -20,6 +20,7 @@ public class EnemyManager : MonoBehaviour
 
     public event Action<GameObject> OnMageCalled;
     public static event Action OnRoomCompleted;
+    public event Action OnEnemyDespawn;
     
     private void Awake()
     {
@@ -147,19 +148,25 @@ public class EnemyManager : MonoBehaviour
             }
         }
     }
+
+    private IEnumerator DespawnEnemies(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        OnEnemyDespawn?.Invoke();
+    }
     
     private void HandlerEnemyKilled(GameObject obj)
     {
         //Debug.Log($"ENEMIGO {obj} ELIMINADO");
 
         OnMageCalled?.Invoke(obj);
-
         activeEnemyAmount--;
 
         if (activeEnemyAmount == 0)
         {
             OnRoomCompleted?.Invoke();
-            StartCoroutine(DeactivateEnemies(1f));
+            StartCoroutine(DespawnEnemies(1f));
+            StartCoroutine(DeactivateEnemies(2f));
         }
     }
 
