@@ -7194,6 +7194,10 @@ PrefabInstance:
       propertyPath: teleportPosition
       value: 
       objectReference: {fileID: 1112434366}
+    - target: {fileID: 5212118554816043602, guid: 88512dbd88082204aa6b64814b158179, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 5786890995668271765, guid: 88512dbd88082204aa6b64814b158179, type: 3}
       propertyPath: teleportPosition
       value: 

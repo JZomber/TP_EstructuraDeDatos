@@ -16,6 +16,7 @@ TagManager:
   - EnemyBullet
   - Wall
   - TpCollider
+  - EnemyShield
   layers:
   - Default
   - TransparentFX
@@ -29,8 +30,8 @@ TagManager:
   - Traps
   - Roof
   - gun
-  - 
-  - 
+  - powerup
+  - grafoBoxes
   - 
   - 
   - 

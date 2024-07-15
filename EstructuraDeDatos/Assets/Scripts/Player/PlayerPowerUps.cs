@@ -44,7 +44,7 @@ public class PlayerPowerUps : MonoBehaviour
             {
                 if (powerUp.name == "Shield") // Si el objeto es el escudo
                 {
-                    playerCollider.enabled = false;
+                    //playerCollider.enabled = false;
                     shieldPrefab.SetActive(true);
                     isShieldActive = true;
 
@@ -78,7 +78,7 @@ public class PlayerPowerUps : MonoBehaviour
         if (shieldPowerUp.damageResist <= 0) //Si la resistencia del escudo termina
         {
             isShieldActive = false;
-            playerCollider.enabled = true;
+            //playerCollider.enabled = true;
             shieldPowerUp.damageResist = 5;
             shieldPrefab.SetActive(false);
         }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7067717376065530067}
   - component: {fileID: 799688462400459377}
   - component: {fileID: 8587810078776154182}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShieldPower
   m_TagString: Shield
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4317076061090765072}
   m_Father: {fileID: 0}
@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c6a6a74910663a49a4bda3845c1359c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageResist: 5
 --- !u!1 &2910604741810473329
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +93,7 @@ GameObject:
   - component: {fileID: 4317076061090765072}
   - component: {fileID: 980749533048665986}
   - component: {fileID: 1428690354067504347}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShieldEffect
   m_TagString: Shield
   m_Icon: {fileID: 0}
