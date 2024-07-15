@@ -28,8 +28,8 @@ public class PlayerDamage : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy") && canTakeDamage && playerCollider.enabled || 
-            other.CompareTag("EnemyBullet") && canTakeDamage && playerCollider.enabled) // Si el jugador colisiona con un enemigo / bullet y puede tomar daño
+        if (other.CompareTag("Enemy") && canTakeDamage && playerCollider.enabled && !playerPowerUps.shieldPrefab.activeInHierarchy || 
+            other.CompareTag("EnemyBullet") && canTakeDamage && playerCollider.enabled && !playerPowerUps.shieldPrefab.activeInHierarchy) // Si el jugador colisiona con un enemigo / bullet y puede tomar daño
         {
             lifeSystem.TakeDamage(1); // Reduce la vida del jugador en 1
             canTakeDamage = false; // Deshabilita la capacidad de tomar daño temporalmente
