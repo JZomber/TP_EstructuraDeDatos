@@ -19,9 +19,13 @@ public class QuickSortData : ScriptableObject
 
     public float MainPlayerRecordTime => mainPlayerRecordTime; // Se referencia la variable privada en una pública.
 
-    public void SetNewRecord(float record) // Se utiliza para setear un nuevo record de tiempo al player.
+    public void SetNewTime(float record) // Se utiliza para setear un nuevo record de tiempo al player.
     {
-        mainPlayerRecordTime = record;
+        mainPlayerTime = record;
+        if (mainPlayerTime > mainPlayerRecordTime)
+        {
+            mainPlayerRecordTime = mainPlayerTime;
+        }
     }
     
     // VARIABLES INVENTADAS PARA EL QUICKSORT (NO SE PUEDEN MODIFICAR DESDE OTRO SCRIPT, SOLO DESDE INSPECTOR)
@@ -35,20 +39,16 @@ public class QuickSortData : ScriptableObject
     [SerializeField] private float scorePlayer2 = 25.0f;
     
     [Header("Player 3")]
-    [SerializeField] private string playerName3 = "MotoMoto";
-    [SerializeField] private float scorePlayer3 = 40.2f;
+    [SerializeField] private string playerName3 = "Sape";
+    [SerializeField] private float scorePlayer3 = 22.8f;
     
     [Header("Player 4")]
-    [SerializeField] private string playerName4 = "Sape";
-    [SerializeField] private float scorePlayer4 = 22.8f;
+    [SerializeField] private string playerName4 = "Akira Toriyama";
+    [SerializeField] private float scorePlayer4 = 30.5f;
     
     [Header("Player 5")]
-    [SerializeField] private string playerName5 = "Akira Toriyama";
-    [SerializeField] private float scorePlayer5 = 30.5f;
-    
-    [Header("Player 6")]
-    [SerializeField] private string playerName6 = "Agumon";
-    [SerializeField] private float scorePlayer6 = 22.8f;
+    [SerializeField] private string playerName5 = "Agumon";
+    [SerializeField] private float scorePlayer5 = 22.8f;
 
     // REFERENCIAS DE LAS VARIABLES PRIVADAS CON PÚBLICAS
     //====================================================
@@ -66,7 +66,4 @@ public class QuickSortData : ScriptableObject
     
     public string PlayerName5 => playerName5;
     public float ScorePlayer5 => scorePlayer5;
-    
-    public string PlayerName6 => playerName6;
-    public float ScorePlayer6 => scorePlayer6;
 }

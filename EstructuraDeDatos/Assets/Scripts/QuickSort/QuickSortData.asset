@@ -12,4 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e457ce5d5c2adae45863bdcef0a0a17a, type: 3}
   m_Name: QuickSortData
   m_EditorClassIdentifier: 
+  mainPlayerRecordTime: 0
   mainPlayerTime: 0
+  playerName1: Charizard
+  scorePlayer1: 30.5
+  playerName2: Waifu62
+  scorePlayer2: 25
+  playerName3: Sape
+  scorePlayer3: 22.8
+  playerName4: Akira Toriyama
+  scorePlayer4: 30.5
+  playerName5: Agumon
+  scorePlayer5: 22.8
