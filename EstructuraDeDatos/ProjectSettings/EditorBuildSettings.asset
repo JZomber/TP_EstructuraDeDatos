@@ -9,12 +9,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu/Menu.unity
     guid: ea7a6dfdec4ab86408bf262bd4adf5c7
   - enabled: 1
-    path: Assets/Scenes/Levels/GameLoop.unity
-    guid: 0b39552579903a54bb616f649950bd8a
-  - enabled: 1
     path: Assets/Scenes/Menu/Defeat.unity
     guid: 7eee8f7ebedb16f41bd317ea9729304f
   - enabled: 1
     path: Assets/Scenes/Menu/Victory.unity
     guid: 72ea25fbf52f22f40b4567b07dd2ffab
+  - enabled: 1
+    path: Assets/Scenes/Menu/Codex.unity
+    guid: c24392833f14b8b46a70fd755d6c45eb
+  - enabled: 1
+    path: Assets/Scenes/Menu/Score.unity
+    guid: f339eae5922de5244b3fb25d92d4e11d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_1.unity
+    guid: 7b35e4da131f2644eb3cd0772ef2a870
   m_configObjects: {}

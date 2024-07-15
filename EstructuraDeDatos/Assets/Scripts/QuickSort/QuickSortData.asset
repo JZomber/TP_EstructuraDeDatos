@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e457ce5d5c2adae45863bdcef0a0a17a, type: 3}
+  m_Name: QuickSortData
+  m_EditorClassIdentifier: 
+  mainPlayerRecordTime: 0
+  mainPlayerTime: 0
+  playerName1: Charizard
+  scorePlayer1: 30.5
+  playerName2: Waifu62
+  scorePlayer2: 25
+  playerName3: Sape
+  scorePlayer3: 22.8
+  playerName4: Akira Toriyama
+  scorePlayer4: 30.5
+  playerName5: Agumon
+  scorePlayer5: 22.8

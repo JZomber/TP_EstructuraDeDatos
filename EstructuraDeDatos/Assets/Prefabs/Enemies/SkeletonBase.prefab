@@ -13,7 +13,7 @@ GameObject:
   m_Layer: 0
   m_Name: GunCenter
   m_TagString: Untagged
-  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -192,7 +192,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.019999996, y: 0.14999999}
@@ -210,8 +210,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e005e6122103744a9a0faed905b49e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 50
   speed: 0
+  isAlive: 1
+  isRangedEnemy: 1
+  enemySpawner: {fileID: 5224440271227611922, guid: ea77fe75fbf31b241bbc741084dc52f6, type: 3}
+  enemyName: Skeleton Base
+  EnemySprite: {fileID: 4806371549170660726, guid: 406ecb0b9ba7ba44598f71df4973e55c, type: 3}
   player: {fileID: 2705700512366788034, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
 --- !u!114 &5771353771080875476
 MonoBehaviour:
@@ -225,11 +230,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476c887f2b6edef4fbf5fc52ffa7eef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingOrig: {fileID: 7468041748597094895}
+  shootingOrig: []
   bulletPrefab: {fileID: 3469022813990914431, guid: 11083193d708d3f4b97955819a8177c3, type: 3}
   shootCoolDown: 1.5
   weapon: {fileID: 4325558759717067236}
   canShoot: 1
+  isWeaponActive: 1
 --- !u!95 &461635680555895
 Animator:
   serializedVersion: 5
@@ -267,9 +273,25 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 6813736100987874697, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
+    - target: {fileID: 2238500039648442328, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238500039648442328, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
+      propertyPath: weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: b212596c2c33b0e489dd1d11bd86b39f, type: 2}
     - target: {fileID: 4397660984528788353, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
       propertyPath: m_Name
-      value: BasicPistol
+      value: EnemyGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514721332716920815, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
+      propertyPath: m_Volume
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514721332716920815, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6844201568584190483, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -311,7 +333,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4514721332716920815, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -324,10 +347,5 @@ GameObject:
 --- !u!4 &6916302570399778934 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6844201568584190483, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
-  m_PrefabInstance: {fileID: 72296856623579749}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7468041748597094895 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7395765993182051210, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
   m_PrefabInstance: {fileID: 72296856623579749}
   m_PrefabAsset: {fileID: 0}

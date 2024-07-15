@@ -32,11 +32,14 @@ public class LifeSystem : MonoBehaviour
     private List<Vector3> lostHeartPositions = new List<Vector3>(); // Lista de posiciones de corazones perdidos
     public GameObject player; // Referencia al jugador
     private LevelManager lvlManager;
+    private SoundManager soundManager; // Referencia al SoundManager
 
     void Start()
     {
         lvlManager = FindObjectOfType<LevelManager>();
-        
+
+        soundManager = SoundManager.Instance;
+
         currentLife = maxLife; // Configura la vida actual al máximo al inicio
         hearts.InicializarPila(maxLife); // Inicializa la pila con el tamaño máximo de vida
         InstantiateHearts(); // Crea y muestra los corazones
@@ -72,6 +75,11 @@ public class LifeSystem : MonoBehaviour
             Destroy(heartToRemove.gameObject);
         }
 
+        if (soundManager != null)
+        {
+            soundManager.PlayPlayerTakeDamageSound();
+        }
+
         if (currentLife <= 0)
         {
             //Debug.LogError("Player is already dead!");
@@ -102,8 +110,12 @@ public class LifeSystem : MonoBehaviour
                 hearts.Apilar(newHeart);
                 currentLife++;
                 obj.SetActive(false); // Desactivo el objeto
+
+                if (soundManager != null)
+                {
+                    soundManager.PlayPlayerHealSound();
+                }
             }
         }
     }
 }
-

@@ -61,7 +61,7 @@ public class PlayerMov : MonoBehaviour
 
         if (other.CompareTag("TpCollider"))
         {
-            lvlManager.TpWaypoint();
+            //lvlManager.TpWaypoint();
         }
     }
 }
