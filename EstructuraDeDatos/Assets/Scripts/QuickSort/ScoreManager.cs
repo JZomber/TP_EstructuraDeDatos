@@ -22,7 +22,6 @@ public class ScoreManager : MonoBehaviour
             new ScoreData { playerName = quickSortData.PlayerName3, completionTime = quickSortData.ScorePlayer3 },
             new ScoreData { playerName = quickSortData.PlayerName4, completionTime = quickSortData.ScorePlayer4 },
             new ScoreData { playerName = quickSortData.PlayerName5, completionTime = quickSortData.ScorePlayer5 },
-            new ScoreData { playerName = quickSortData.PlayerName6, completionTime = quickSortData.ScorePlayer6 },
             new ScoreData { playerName = "Player", completionTime = quickSortData.mainPlayerTime }
         };
 

@@ -8926,7 +8926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bdc8891e03c27a4384394b5735d7d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 50
+  maxLife: 5
   heartPrefab: {fileID: 6331390066630487331, guid: f98724ad0c748c24c85e6bf409b659b1, type: 3}
   heartParent: {fileID: 1359032307}
   player: {fileID: 1565893358}
@@ -9841,12 +9841,16 @@ PrefabInstance:
       objectReference: {fileID: 1565893358}
     - target: {fileID: 6512463128250839290, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
       propertyPath: isGameLoop
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6512463128250839290, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
       propertyPath: killsRequired
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6512463128250839290, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
+      propertyPath: quickSortData
+      value: 
+      objectReference: {fileID: 11400000, guid: d797e36c3662da1488cbc15aa8292e1f, type: 2}
     - target: {fileID: 6512463128250839290, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
       propertyPath: holderColliders
       value: 
